@@ -6,6 +6,7 @@ import 'package:gp/core/base_usecase.dart';
 import 'package:gp/core/error/failure.dart';
 import 'package:gp/user/domain/repository/base_user_repository.dart';
 
+import '../../../core/global_models/user_post_model.dart';
 import '../entity/user_entity.dart';
 
 class UserUpdateUseCase extends BaseUseCase<UserEntity, Parameter_update> {
@@ -16,33 +17,26 @@ class UserUpdateUseCase extends BaseUseCase<UserEntity, Parameter_update> {
   @override
   Future<Either<Failure, UserEntity>> call(Parameter_update parameter) async {
     return await baseUserRepository.userUpdate(
-        first_name: parameter.first_name,
-        last_name: parameter.last_name,
-        personal_image: parameter.personal_image,
-      id: parameter.id,
+       userPostModel: parameter.userPostModel,
+      id: parameter.id
     );
   }
 }
 
 class Parameter_update extends Equatable {
-  final String first_name;
-  final String last_name;
+  final UserPostModel userPostModel;
   final int id;
-  final File personal_image;
-
   Parameter_update(
-      {required this.first_name,
-      required this.last_name,
-      required this.personal_image,
-      required this.id
+      {
+        required this.userPostModel,
+        required this.id
+
       });
 
   @override
   // TODO: implement props
   List<Object?> get props => [
-        first_name,
-        last_name,
-        personal_image,
-    id,
+        userPostModel,
+    id
       ];
 }

@@ -1,55 +1,57 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 
 
-class UserEntity extends Equatable {
+class UserPostModel extends Equatable {
 
   // final String token;  // هناخده ك shared preference in login
-  final int id;
   final String first_name;
   final String last_name;
   final String gender;
   final String age;
   final String id_number;
-  final String personal_image;
-  final String card_image;
+   File? personal_image;
+   File? card_image;
   final String email;
+  final String password;
   final String country;
   final String city;
   final String address;
   final String phone_number;
-  final int have_car;
-   String? car_model;
-   String? car_color;
-   String? car_plate_number;
-   String? car_image;
-   String? car_plate_image;
-   String? car_license_image;
+  final String have_car;
+  String? car_model;
+  String? car_color;
+  String? car_plate_number;
+  File? car_image;
+  File? car_plate_image;
+  File? car_license_image;
   final String trip_gender;
-  final int smoke;
-  final int trip_smoke;
-  final int trip_music;
-  final int trip_conditioner;
-  final int trip_children;
-  final int trip_pets;
-  int? car_seats;
+  final String smoke;
+  final String trip_smoke;
+  final String trip_music;
+  final String trip_conditioner;
+  final String trip_children;
+  final String trip_pets;
+  String? car_seats;
   String? cluster_number;
 
-  UserEntity({
-    required this.id,
+  UserPostModel({
     required this.first_name,
     required this.last_name,
     required this.gender,
     required this.age,
     required this.id_number,
-    required this.personal_image,
-    required this.card_image,
+     this.personal_image,
+     this.card_image,
     required this.email,
     required this.country,
     required this.city,
     required this.address,
+    required this.password,
     required this.phone_number,
     required this.have_car,
     this.car_model,
@@ -73,7 +75,6 @@ class UserEntity extends Equatable {
   // TODO: implement props
   List<Object?> get props =>
       [
-        id,
         first_name,
         last_name,
         gender,
@@ -81,8 +82,8 @@ class UserEntity extends Equatable {
         id_number,
         personal_image,
         card_image,
+        password,
         email,
-
         country,
         city,
         address,

@@ -7,7 +7,9 @@ import 'package:gp/test.dart';
 import 'package:gp/trip/data/repository/trip_repository.dart';
 import 'package:gp/trip/domain/respository/base_trip_repository.dart';
 import 'package:gp/trip/domain/usecase/trip_create_usecase.dart';
+import 'package:gp/trip/domain/usecase/trip_delete_usecase.dart';
 import 'package:gp/trip/domain/usecase/trip_get_all_usecase.dart';
+import 'package:gp/trip/domain/usecase/trip_update_usecase.dart';
 import 'package:gp/user/data/data_source/user_remote_data_source.dart';
 import 'package:gp/user/data/repository/user_repository.dart';
 import 'package:gp/user/domain/repository/base_user_repository.dart';
@@ -18,18 +20,18 @@ import 'Register/LoginPage.dart';
 import 'Register/SignupPage.dart';
 
 void main() async {
-  BaseUserRemoteDataSource baseUserRemoteDataSource=UserRemoteDataSource();
-  BaseUserRepository baseUserRepository=UserRepository(baseUserRemoteDataSource);
-  UserGetUseCase userGatAllUseCase=UserGetUseCase(baseUserRepository);
-  await userGatAllUseCase(Parameter_User_Get(id:10 ));
+  // BaseUserRemoteDataSource baseUserRemoteDataSource=UserRemoteDataSource();
+  // BaseUserRepository baseUserRepository=UserRepository(baseUserRemoteDataSource);
+  // UserGetUseCase userGatAllUseCase=UserGetUseCase(baseUserRepository);
+  // await userGatAllUseCase(Parameter_User_Get(id:16 ));
+  BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  BaseTripRepository baseTripRepository =
+      TripRepository(baseUserRemoteDataSource);
+  TripDeleteUseCase tripDeleteUseCase = TripDeleteUseCase(baseTripRepository);
+  await tripDeleteUseCase(Parameter_delete(
+      id: 3
+  ));
   runApp(const MyApp());
-
-
-  // BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
-  // BaseTripRepository baseTripRepository =
-  //     TripRepository(baseUserRemoteDataSource);
-  // TripGetAllUseCase tripGetAllUseCase = TripGetAllUseCase(baseTripRepository);
-  // await tripGetAllUseCase(NoParameter());
 }
 
 class MyApp extends StatelessWidget {

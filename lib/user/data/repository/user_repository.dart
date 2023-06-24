@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:gp/core/error/exception.dart';
 import 'package:gp/core/error/failure.dart';
+import 'package:gp/core/global_models/user_post_model.dart';
 import 'package:gp/user/data/data_source/user_remote_data_source.dart';
 import 'package:gp/user/data/model/user_model.dart';
 import 'package:gp/user/domain/entity/user_entity.dart';
@@ -13,14 +14,15 @@ class UserRepository extends BaseUserRepository{
 
   UserRepository(this.baseUserRemoteDataSource);
   @override
-  
+
+  //192.168.1.185
   Future<Either<Failure, UserEntity>> userGet({required int user_id}) async {
-    var respons= await baseUserRemoteDataSource.getRequest("http://192.168.1.185:9000/api/user/${user_id}");
+    var respons= await baseUserRemoteDataSource.getRequest("http://192.168.1.10:9000/api/user/${user_id}");
     try
     {
       //print(respons);
       //var x=List<UserEntity>.from((respons["result"] as List).map((e) => UserModel.fromjson(e)));
-      print(respons["result"]);
+      print(respons["result"]['have_car']);
       return Right(UserModel.fromjson(respons["result"] ));
       //return Right(List<UserEntity>.from((respons.data["results"] as List).map((e) => UserModel.fromjson(e))));
     }
@@ -67,13 +69,40 @@ class UserRepository extends BaseUserRepository{
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> userRegister({required String email,required String password,required File image1,required File image2}) async{
-    var respons= await baseUserRemoteDataSource.postWithImage("http://192.168.1.3:9000/api/register", {
-      "email": email,
-      "password":password
+  Future<Either<Failure, Map<String, dynamic>>> userRegister({required UserPostModel userPostModel}) async{
+    var respons= await baseUserRemoteDataSource.postWithImage("http://192.168.1.10:9000/api/register", {
+      "first_name": userPostModel.first_name,
+      "last_name":userPostModel.last_name,
+      "gender": userPostModel.gender,
+      "age":userPostModel.age,
+      "id_number": userPostModel.id_number,
+      "email":userPostModel.email,
+      "password": userPostModel.password,
+      "c_password":userPostModel.password,
+      "country":userPostModel.country,
+      "city": userPostModel.city,
+      "address":userPostModel.address,
+      "phone_number": userPostModel.phone_number,
+      "have_car":userPostModel.have_car,
+      "car_model": userPostModel.car_model,
+      "car_color":userPostModel.car_color,
+      "car_plate_number": userPostModel.car_plate_number,
+      "trip_gender":userPostModel.trip_gender,
+      "smoke": userPostModel.smoke,
+      "trip_smoke":userPostModel.trip_smoke,
+      "trip_music": userPostModel.trip_music,
+      "trip_conditioner":userPostModel.trip_conditioner,
+      "trip_children": userPostModel.trip_children,
+      "trip_pets":userPostModel.trip_pets,
+      "car_seats": userPostModel.car_seats,
     },
-    image1,
-      file2: image2
+
+      personal_image: userPostModel.personal_image!,
+      card_image: userPostModel.card_image!,
+      car_image: userPostModel.car_image,
+      car_license_image: userPostModel.car_license_image,
+      car_plate_image: userPostModel.car_plate_image
+
     );
     try
     {
@@ -86,20 +115,46 @@ class UserRepository extends BaseUserRepository{
   }
 
   @override
-  Future<Either<Failure, UserEntity>> userUpdate({required String first_name, required String last_name,required int id, required File personal_image}) async {
+  Future<Either<Failure, UserEntity>> userUpdate({required UserPostModel userPostModel,required int id}) async {
 
-    var respons= await baseUserRemoteDataSource.updateRequest("http://192.168.1.185:9000/api/user/$id", {
+    var respons= await baseUserRemoteDataSource.updateRequest("http://192.168.1.10:9000/api/user/$id", {
 
       "_method":"PUT",
-      "first_name": first_name,
-      "last_name":first_name
+      "first_name": userPostModel.first_name,
+      "last_name":userPostModel.last_name,
+      "gender": userPostModel.gender,
+      "age":userPostModel.age,
+      "id_number": userPostModel.id_number,
+      "email":userPostModel.email,
+      "password": userPostModel.password,
+      "c_password":userPostModel.password,
+      "country":userPostModel.country,
+      "city": userPostModel.city,
+      "address":userPostModel.address,
+      "phone_number": userPostModel.phone_number,
+      "have_car":userPostModel.have_car,
+      "car_model": userPostModel.car_model,
+      "car_color":userPostModel.car_color,
+      "car_plate_number": userPostModel.car_plate_number,
+      "trip_gender":userPostModel.trip_gender,
+      "smoke": userPostModel.smoke,
+      "trip_smoke":userPostModel.trip_smoke,
+      "trip_music": userPostModel.trip_music,
+      "trip_conditioner":userPostModel.trip_conditioner,
+      "trip_children": userPostModel.trip_children,
+      "trip_pets":userPostModel.trip_pets,
+      "car_seats": userPostModel.car_seats,
     },
-      personal_image,
+        personal_image: userPostModel.personal_image,
+        card_image: userPostModel.card_image,
+        car_image: userPostModel.car_image,
+        car_license_image: userPostModel.car_license_image,
+        car_plate_image: userPostModel.car_plate_image
 
     );
     try
     {
-      print(respons);
+      print(respons["result"]['have_car']);
 
       return Right(UserModel.fromjson(respons["result"]));
     } on ServerException catch(e)

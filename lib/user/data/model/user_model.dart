@@ -2,7 +2,6 @@ import 'package:gp/user/domain/entity/user_entity.dart';
 
 class UserModel extends UserEntity {
    UserModel({
-
     required super.id,
     required super.first_name,
     required super.last_name,
@@ -31,7 +30,8 @@ class UserModel extends UserEntity {
     required super.trip_children,
     required super.trip_pets,
      super.car_seats,
-     super.cluster_number});
+     super.cluster_number,
+    });
 
   factory UserModel.fromjson(Map<String, dynamic> json)
   =>

@@ -39,14 +39,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               // car info
               Row(
                 children: [
-                  Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    width: 80,
-                    child: const Divider(
-                      color: Color(0xFF442268),
-                      height: 0,
-                      thickness: 3.5,
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+
+                      child:  const Divider(
+                        color: Color(0xFF442268),
+                        height: 0,
+                        thickness: 3.5,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -62,14 +64,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   const SizedBox(
                     width: 25,
                   ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    width: 80,
-                    child: const Divider(
-                      color: Color(0xFF442268),
-                      height: 0,
-                      thickness: 3.5,
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+
+                      child:  const Divider(
+                        color: Color(0xFF442268),
+                        height: 0,
+                        thickness: 3.5,
+                      ),
                     ),
                   ),
                 ],
@@ -98,19 +102,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: 200,
-                    height: 85,
-                    padding: const EdgeInsets.all(20),
-                    child: TextField(
-                      controller: carcolor,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Car Color',
-                        labelStyle: TextStyle(
-                            color: Color(0xFF836D9A),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 20),
+                  Expanded(
+                    child: Container(
+                      width: 200,
+                      height: 85,
+                      padding: const EdgeInsets.all(20),
+                      child: TextField(
+                        controller: carcolor,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Car Color',
+                          labelStyle: TextStyle(
+                              color: Color(0xFF836D9A),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 20),
+                        ),
                       ),
                     ),
                   ),

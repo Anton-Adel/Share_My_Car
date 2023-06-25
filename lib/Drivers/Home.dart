@@ -237,45 +237,48 @@ class _HomePageState extends State<HomePage>
                                 ),
                               ),
                               const SizedBox(width: 10,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: const [
-                                      Text("Name:",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
-                                      Text("Eslam Khaled Eid",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Phone number:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      //SizedBox(width: 10,),
-                                      Text("01064643135",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Car:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("Grey | Peugeot 3008",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Distance:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("1Km",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                      SizedBox(width: 60,),
-                                      Text("Time:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("10min",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  
+                                  children: [
+                                    Row(
+                                      children: const [
+                                        Text("Name:",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
+                                        Expanded(child: Text("Eslam Khaled Eid",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: const [
+                                        Text("Phone number:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
+                                        //SizedBox(width: 10,),
+                                        Expanded(child: Text("01064643135",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: const [
+                                        Text("Car:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
+                                        Expanded(child: Text("Grey | Peugeot 3008",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: const [
+                                        Text("Distance:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
+                                        Text("1Km",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
+                                        Spacer(),
+                                        Text("Time:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
+                                        Text("10min",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 15),
                           // implement the rating bar
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                             child: RatingBar(
                                 initialRating: 0,
                                 direction: Axis.horizontal,
@@ -308,102 +311,7 @@ class _HomePageState extends State<HomePage>
                               builder: (context) => const ProfilePage()));
                     },
                   ),
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
-                      margin: const EdgeInsets.all(20),
-                      height: 180,
-                      width: 400,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF1F1F1),
-                        border: Border.all(color: Colors.black12, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const CircleAvatar(
-                                radius: 45,
-                                backgroundColor: Color(0xFF442268),
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage('assets/sh.jpg'),
-                                  radius: 43.5,
-                                ),
-                              ),
-                              const SizedBox(width: 10,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: const [
-                                      Text("Name:",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
-                                      Text("Eslam Khaled Eid",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Phone number:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      //SizedBox(width: 10,),
-                                      Text("01011223344",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Car:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("red | honda | gh125",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Text("Distance:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("1Km",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                      SizedBox(width: 60,),
-                                      Text("Time:",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
-                                      Text("10min",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          // implement the rating bar
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
-                            child: RatingBar(
-                                initialRating: 0,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
-                                itemSize: 30,
-                                ratingWidget: RatingWidget(
-                                    full: const Icon(Icons.star,
-                                        color: Colors.orange),
-                                    half: const Icon(
-                                      Icons.star_half,
-                                      color: Colors.orange,
-                                    ),
-                                    empty: const Icon(
-                                      Icons.star_outline,
-                                      color: Colors.orange,
-                                    )),
-                                onRatingUpdate: (value) {
-                                  setState(() {
-                                    _ratingValue = value;
-                                  });
-                                }),
-                          ),
-                        ],
-                      ),),
-                    onTap:() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePage()));
-                    },
-                  ),
+
                 ],
               ),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gp/Drivers/ProfilePage.dart';
 
-import '../Register/LoginPage.dart';
+import '../user/presentation/screens/LoginPage.dart';
 import '../Register/SignupPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage>
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
+                          builder: (context) =>  LoginPage()));
                 },
               ),
               ListTile(

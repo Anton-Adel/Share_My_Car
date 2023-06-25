@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Register/SignupPage.dart';
+import 'package:gp/user/presentation/controller/login/login_cubit.dart';
+import 'package:gp/user/presentation/controller/login/login_states.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends StatelessWidget {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  @override
+  LoginPage({super.key});
   Widget build(BuildContext context) {
+    return BlocProvider(
+  create: (context) => LoginCubit(),
+  child: BlocConsumer<LoginCubit, LoginState>(
+  listener: (context, state) {
+
+  },
+  builder: (context, state) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -38,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Container(
                         alignment: Alignment.centerRight,
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                       // width: double.infinity,
+                        // width: double.infinity,
                         child:  Divider(
                           color: Colors.white,
                           height: 0,
@@ -159,8 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                                 backgroundColor: Color(0xFF3C1858)),
                           ),
                           onPressed: () {
-                            print(nameController.text);
-                            print(passwordController.text);
+                            LoginCubit.get(context).Login(email:nameController.text , password: passwordController.text);
                           },
                         ),
                       ),
@@ -254,5 +256,9 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  },
+),
+);
   }
 }
+

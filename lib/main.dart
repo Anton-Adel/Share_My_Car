@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/Drivers/Home.dart';
 import 'package:gp/Register/CarInfo.dart';
@@ -18,7 +19,8 @@ import 'package:gp/user/domain/repository/base_user_repository.dart';
 import 'package:gp/user/domain/usecase/user_get_all_usecase.dart';
 import 'package:gp/user/domain/usecase/user_get_usecase.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
-import 'Register/LoginPage.dart';
+import 'core/bloc_observer.dart';
+import 'user/presentation/screens/LoginPage.dart';
 import 'Register/SignupPage.dart';
 import 'Register/Verfication.dart';
 
@@ -34,6 +36,7 @@ void main() async {
   await tripDeleteUseCase(Parameter_delete(
       id: 3
   ));*/
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -44,7 +47,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       home:  CarInfo(),
+=======
+      home:LoginPage(),
+>>>>>>> 132264269d21638cc0bf8b1ef9b84fb5f0225d35
     );
   }
 }

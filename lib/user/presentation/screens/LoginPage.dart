@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Register/SignupPage.dart';
+import 'package:gp/user/presentation/controller/login/login_cubit.dart';
+import 'package:gp/user/presentation/controller/login/login_states.dart';
 
 class LoginPage extends StatelessWidget {
+<<<<<<< HEAD:lib/Register/LoginPage.dart
    LoginPage({Key? key}) : super(key: key);
+=======
+>>>>>>> 132264269d21638cc0bf8b1ef9b84fb5f0225d35:lib/user/presentation/screens/LoginPage.dart
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
+<<<<<<< HEAD:lib/Register/LoginPage.dart
    @override
    Widget build(BuildContext context) {
      return Scaffold(
@@ -60,6 +67,66 @@ class LoginPage extends StatelessWidget {
                          child: Container(
                            alignment: Alignment.centerRight,
                            padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+=======
+  LoginPage({super.key});
+  Widget build(BuildContext context) {
+    return BlocProvider(
+  create: (context) => LoginCubit(),
+  child: BlocConsumer<LoginCubit, LoginState>(
+  listener: (context, state) {
+
+  },
+  builder: (context, state) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // text over image
+            Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height*0.25,
+              width: double.infinity,
+              // decoration: const BoxDecoration(
+              //     // image: DecorationImage(
+              //     //     image: AssetImage("assets/sh.jpg"),
+              //     //     fit: BoxFit.cover)
+              //        ),
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        // width: double.infinity,
+                        child:  Divider(
+                          color: Colors.white,
+                          height: 0,
+                          thickness: 3.9,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+>>>>>>> 132264269d21638cc0bf8b1ef9b84fb5f0225d35:lib/user/presentation/screens/LoginPage.dart
 
                            child:  Divider(
                              color: Colors.white,
@@ -149,6 +216,7 @@ class LoginPage extends StatelessWidget {
 
                          const Padding(padding: EdgeInsets.all(5)),
 
+<<<<<<< HEAD:lib/Register/LoginPage.dart
                          // login button
                          Container(
                            height: 70,
@@ -174,6 +242,29 @@ class LoginPage extends StatelessWidget {
                              },
                            ),
                          ),
+=======
+                      // login button
+                      Container(
+                        height: 70,
+                        width: 360,
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF3C1858),
+                          ),
+                          child: const Text(
+                            'Sign In',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                                backgroundColor: Color(0xFF3C1858)),
+                          ),
+                          onPressed: () {
+                            LoginCubit.get(context).Login(email:nameController.text , password: passwordController.text);
+                          },
+                        ),
+                      ),
+>>>>>>> 132264269d21638cc0bf8b1ef9b84fb5f0225d35:lib/user/presentation/screens/LoginPage.dart
 
 
                          // signup button
@@ -267,6 +358,72 @@ class LoginPage extends StatelessWidget {
      );
    }
 
+<<<<<<< HEAD:lib/Register/LoginPage.dart
 }
 
 
+=======
+                      // forget password
+                      TextButton(
+                        onPressed: () {
+                          //forgot password screen
+                        },
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                width: 50,
+                                child: const Divider(
+                                  color: Color(0xFF442268),
+                                  height: 0,
+                                  thickness: 2.5,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 13,
+                            ),
+                            const Text(
+                              'Forgot Password ?',
+                              style: TextStyle(
+                                  color: Color(0xFF442268),
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w400,
+                                  backgroundColor: Color(0xFFF7F2F8)),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                width: 50,
+                                child: const Divider(
+                                  color: Color(0xFF442268),
+                                  height: 0,
+                                  thickness: 2.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  },
+),
+);
+  }
+}
+
+>>>>>>> 132264269d21638cc0bf8b1ef9b84fb5f0225d35:lib/user/presentation/screens/LoginPage.dart

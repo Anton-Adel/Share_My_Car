@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/Drivers/Home.dart';
-import 'package:gp/Register/CarInfo.dart';
+import 'package:gp/user/presentation/screens/CarInfo.dart';
 import 'package:gp/core/base_usecase.dart';
 import 'package:gp/map/location.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -21,8 +21,8 @@ import 'package:gp/user/domain/usecase/user_get_usecase.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
 import 'core/bloc_observer.dart';
 import 'user/presentation/screens/LoginPage.dart';
-import 'Register/SignupPage.dart';
-import 'Register/Verfication.dart';
+import 'user/presentation/screens/SignupPage.dart';
+import 'user/presentation/screens/Verfication.dart';
 
 void main() async {
   // BaseUserRemoteDataSource baseUserRemoteDataSource=UserRemoteDataSource();
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:LoginPage(),
+      home:SignUpPage(),
     );
   }
 }

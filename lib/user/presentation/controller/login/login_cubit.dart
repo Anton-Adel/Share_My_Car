@@ -36,7 +36,7 @@ class LoginCubit extends Cubit<LoginState> {
       });
     }).catchError((e) {
 
-      print(e);
+      print(e.toString());
       emit(LoginErrorState());
     });
   }

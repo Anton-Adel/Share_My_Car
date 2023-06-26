@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gp/Drivers/ProfilePage.dart';
 
 import '../user/presentation/screens/LoginPage.dart';
-import '../Register/SignupPage.dart';
+import '../user/presentation/screens/SignupPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage>
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignUpPage()));
+                          builder: (context) =>  SignUpPage()));
                 },
               ),
             ],

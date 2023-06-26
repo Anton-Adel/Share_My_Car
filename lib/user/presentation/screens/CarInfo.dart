@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gp/Register/Verfication.dart';
+import 'package:gp/user/presentation/screens/Verfication.dart';
 
 class CarInfo extends StatelessWidget {
   const CarInfo({Key? key}) : super(key: key);

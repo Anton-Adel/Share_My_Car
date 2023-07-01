@@ -29,13 +29,13 @@ class UserPostModel extends Equatable {
   File? car_image;
   File? car_plate_image;
   File? car_license_image;
-  final String trip_gender;
-  final String smoke;
-  final String trip_smoke;
-  final String trip_music;
-  final String trip_conditioner;
-  final String trip_children;
-  final String trip_pets;
+   String? trip_gender;
+   String? smoke;
+   String? trip_smoke;
+   String? trip_music;
+   String? trip_conditioner;
+   String? trip_children;
+   String? trip_pets;
   String? car_seats;
   String? cluster_number;
 
@@ -60,13 +60,13 @@ class UserPostModel extends Equatable {
     this.car_image,
     this.car_plate_image,
     this.car_license_image,
-    required this.trip_gender,
-    required this.smoke,
-    required this.trip_smoke,
-    required this.trip_music,
-    required this.trip_conditioner,
-    required this.trip_children,
-    required this.trip_pets,
+     this.trip_gender,
+     this.smoke,
+     this.trip_smoke,
+     this.trip_music,
+     this.trip_conditioner,
+     this.trip_children,
+     this.trip_pets,
     this.car_seats,
     this.cluster_number
   });

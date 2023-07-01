@@ -52,7 +52,7 @@ final picker = ImagePicker();
 
 Future<File> get_image() async
 {
-  final f = await picker.pickImage(source: ImageSource.camera);
+  final f = await picker.pickImage(source: ImageSource.gallery);
   if (f != null) {
     image = File(f.path);
     print(image);

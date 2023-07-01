@@ -16,6 +16,19 @@ class RegisterHaveCar extends RegisterState{}
 
 class RegisterGetDate extends RegisterState{}
 
-class RegisterPersonalImageController extends RegisterState{}
 
-class RegisterCardImageController extends RegisterState{}
+
+class RegisterImageController extends RegisterState{}
+
+class RegisterQuestion extends RegisterState{}
+class RegisterQuestionLoading extends RegisterState{}
+
+
+
+
+
+class RegisterSendCodeSuccessState extends RegisterState{}
+
+class RegisterSendCodeLoadingState extends RegisterState{}
+
+class RegisterSendCodeErrorState extends RegisterState{}

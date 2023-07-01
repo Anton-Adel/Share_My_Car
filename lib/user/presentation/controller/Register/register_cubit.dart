@@ -9,6 +9,7 @@ import 'package:gp/user/domain/usecase/user_register_usecase.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
 import 'package:gp/user/presentation/controller/login/login_states.dart';
 
+import '../../../../core/shared_components/Constants.dart';
 import '../../../data/data_source/user_remote_data_source.dart';
 import '../../../data/repository/user_repository.dart';
 import '../../../domain/repository/base_user_repository.dart';
@@ -25,15 +26,83 @@ class RegisterCubit extends Cubit<RegisterState> {
   bool dont_have_car=false;
   bool check_car=false;
 
-  TextEditingController dateInput = TextEditingController();
+  //TextEditingController dateInput = TextEditingController();
   TextEditingController personalImage = TextEditingController();
   TextEditingController idCardImage = TextEditingController();
+  TextEditingController carimage = TextEditingController();
+  TextEditingController carplateimage = TextEditingController();
+  TextEditingController carlicenseimage = TextEditingController();
 
-  void get_date(value)
+
+  String? Q1;
+  String? Q2;
+  String? Q3;
+  String? Q4;
+  String? Q5;
+  String? Q6;
+  String? Q7;
+
+
+  void get_question_value(value,index)
   {
-    dateInput.text=value;
-    emit(RegisterGetDate());
+    switch (index)
+    {
+      case 1:
+        Q1=value;
+        break;
+
+      case 2:
+        Q2=value;
+        break;
+      case 3:
+        Q3=value;
+        break;
+      case 4:
+        Q4=value;
+        break;
+      case 5:
+        Q5=value;
+        break;
+      case 6:
+        Q6=value;
+        break;
+      case 7:
+        Q7=value;
+        break;
+    }
+    emit(RegisterQuestion());
   }
+
+  void send_code ()
+  {
+    try {
+      emit(RegisterSendCodeLoadingState());
+      BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+      baseUserRemoteDataSource.postRequest("$Path/sendcode", {
+        "first_name": userPostModel!.first_name,
+        "last_name": userPostModel!.last_name,
+        "email": userPostModel!.email
+      }).then((value) {
+        Code = value['result']['code'];
+
+        print("code is $Code");
+        emit(RegisterSendCodeSuccessState());
+      }).catchError((e) {
+        print(e.toString());
+        emit(RegisterSendCodeErrorState());
+      });
+    }
+    catch(e)
+    {
+      print(e.toString());
+      emit(RegisterSendCodeErrorState());
+    }
+  }
+  // void get_date(value)
+  // {
+  //   dateInput.text=value;
+  //   emit(RegisterGetDate());
+  // }
   void change_gender(value)
   {
     gender=value;
@@ -48,17 +117,23 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterHaveCar());
   }
 
-  void personal_image_controller(value)
+  // void personal_image_controller(value,)
+  // {
+  //   personalImage.text=value;
+  //   emit(RegisterPersonalImageController());
+  // }
+  // void card_image_controller(value)
+  // {
+  //   idCardImage.text=value;
+  //   emit(RegisterCardImageController());
+  //
+  // }
+  void display_image_name(value,TextEditingController controller)
   {
-    personalImage.text=value;
-    emit(RegisterPersonalImageController());
+    controller.text=value;
+    emit(RegisterImageController());
   }
-  void card_image_controller(value)
-  {
-    idCardImage.text=value;
-    emit(RegisterCardImageController());
 
-  }
   void Register()
   {
     emit(RegisterLoadingState());

@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Drivers/Home.dart';
+import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/screens/CarInfo.dart';
 import 'package:gp/core/base_usecase.dart';
 import 'package:gp/map/location.dart';
@@ -19,6 +21,7 @@ import 'package:gp/user/domain/repository/base_user_repository.dart';
 import 'package:gp/user/domain/usecase/user_get_all_usecase.dart';
 import 'package:gp/user/domain/usecase/user_get_usecase.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
+import 'package:gp/user/presentation/screens/Properties.dart';
 import 'core/bloc_observer.dart';
 import 'user/presentation/screens/LoginPage.dart';
 import 'user/presentation/screens/SignupPage.dart';
@@ -45,9 +48,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:SignUpPage(),
+    return  MultiBlocProvider(
+
+      providers: [
+
+        BlocProvider(create: (context)=>RegisterCubit())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:SignUpPage(),
+      ),
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 abstract class BaseUserRemoteDataSource {
   getRequest(String uri);
 
-  postRequest(String uri, Map data);
+  Future postRequest(String uri, Map data);
 
   postWithImage(String uri, Map data,  {required File personal_image,required File card_image,File? car_image,File? car_plate_image,File? car_license_image });
 

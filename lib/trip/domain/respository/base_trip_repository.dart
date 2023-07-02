@@ -17,7 +17,9 @@ abstract class BaseTripRepository {
       required String start_time,
        String? end_time,
       required String user_id,
-      required String user_cluster
+      required String user_cluster,
+        required String start_date,
+        String? shared_seats,
       });
 
   Future<Either<Failure, TripEntity>> tripUpdate(

@@ -8,9 +8,9 @@ import 'package:gp/core/shared_components/shared.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
 import 'package:intl/intl.dart';
-import 'package:gp/user/presentation/screens/CarInfo.dart';
+import 'package:gp/user/presentation/screens/Register/CarInfo.dart';
 
-import '../../../Drivers/Home.dart';
+
 import 'Verfication.dart';
 
 // const List<String> list = <String>['One', 'Two', 'Three', 'Four'];

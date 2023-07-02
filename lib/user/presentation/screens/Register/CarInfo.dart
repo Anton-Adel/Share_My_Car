@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
-import 'package:gp/user/presentation/screens/Properties.dart';
-import 'package:gp/user/presentation/screens/Verfication.dart';
+import 'package:gp/user/presentation/screens/Register/Properties.dart';
+import 'package:gp/user/presentation/screens/Register/Verfication.dart';
 
-import '../../../core/shared_components/shared.dart';
+import '../../../../core/shared_components/shared.dart';
 
 class CarInfo extends StatelessWidget {
   CarInfo({Key? key}) : super(key: key);

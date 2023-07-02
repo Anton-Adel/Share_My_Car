@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/core/shared_components/shared.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
+import 'package:gp/user/presentation/screens/Login/LoginPage.dart';
 
-import '../../../core/shared_components/Constants.dart';
+import '../../../../core/shared_components/Constants.dart';
 
 class verfication extends StatelessWidget {
   verfication({Key? key}) : super(key: key);
@@ -13,7 +15,11 @@ class verfication extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is RegisterSuccessState)
+          {
+            ShowToast("Register is successfully done", ToastState.Success);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+          }
       },
       builder: (context, state) {
         var cubit= RegisterCubit.get(context);

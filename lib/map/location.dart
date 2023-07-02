@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:gp/map/components.dart';
 import 'package:location/location.dart'as loc;
-
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -42,6 +40,7 @@ class _LocationPageState extends State<LocationPage> {
       PointLatLng(destLocation.latitude, destLocation.longitude),
     );
 
+
     if (result.points.isNotEmpty) {
       result.points.forEach(
             (PointLatLng point) => _polylineCoordinates.add(
@@ -63,6 +62,7 @@ class _LocationPageState extends State<LocationPage> {
       List<Placemark> placemarks = await placemarkFromCoordinates(
           latLng.latitude, latLng.longitude,
           localeIdentifier: Platform.localeName);
+
 
       if (placemarks.isNotEmpty) {
         Placemark placemark = placemarks.first;
@@ -95,6 +95,32 @@ class _LocationPageState extends State<LocationPage> {
     }
     return '';
   }
+  Future<LatLng> _getLatLngFromAddress(String address) async {
+    try {
+      List<Location> locations = await locationFromAddress(address);
+
+      if (locations.isNotEmpty) {
+        Location location = locations.first;
+        LatLng latLng = LatLng(location.latitude, location.longitude);
+
+        // Create a new Marker object and add it to the _markers set
+        setState(() {
+          _markers.add(
+            Marker(
+              markerId: MarkerId('destination'),
+              position: latLng,
+              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+              infoWindow: InfoWindow(title: address),
+            ),
+          );
+        });
+        return latLng;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return LatLng(0, 0);
+  }
   void _openLocationSheet() {
     setState(() {
       _isSheetOpen = true;
@@ -117,26 +143,25 @@ class _LocationPageState extends State<LocationPage> {
                   decoration: InputDecoration(
                     labelText: 'Start Address',
                     labelStyle: TextStyle(
-                        color:Color(0xFF836D9A),
+                        color: Color(0xFF836D9A),
                         fontWeight: FontWeight.w300,
                         fontSize: 20),
-
                     suffixIcon: IconButton(
-                      color:Colors.red,
-                      splashColor: const Color(0xFFCF283C),
-                      iconSize: 30,
-                      onPressed: (){
-                        print('hello');
+                      icon: Icon(Icons.my_location),
+                      onPressed: () async {
+                        _currentLocation = await loc.Location().getLocation();
+                        LatLng latLng = LatLng(
+                            _currentLocation!.latitude!,
+                            _currentLocation!.longitude!);
+                        String address =
+                        await _getAddressFromLatLng(latLng);
+                        _startAddressController.text = address;
                       },
-
-                      icon: const Icon(Icons.location_on) ,
-
                     ),
                   ),
-
                 ),
               ),
-              SizedBox(height: 8,),
+              SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
@@ -144,41 +169,35 @@ class _LocationPageState extends State<LocationPage> {
                   decoration: InputDecoration(
                     labelText: 'Destination Address',
                     labelStyle: TextStyle(
-                        color:Color(0xFF836D9A),
+                        color: Color(0xFF836D9A),
                         fontWeight: FontWeight.w300,
                         fontSize: 20),
-
                     suffixIcon: IconButton(
-                      color:const Color(0xFF442268),
-                      splashColor: const Color(0xFFCF283C),
-                      iconSize: 30,
-                      onPressed: (){
-                        print('hello');
-                      },
+                      icon: Icon(Icons.search),
+                      onPressed: () async {
+                        String address =
+                        _endAddressController.text.trim();
+                        if (address.isNotEmpty) {
+                          LatLng destinationLatLng =
+                          await _getLatLngFromAddress(address);
 
-                      icon: const Icon(Icons.location_on) ,
+                          setState(() {
+                            _getPolylinePoints();
+                          });
+                          Navigator.pop(context);
+                        }
+                      },
                     ),
                   ),
+                  onSubmitted: (value) async{
+                    LatLng destinationLatLng = await _getLatLngFromAddress(value);
+
+                    setState(() {
+                      _getPolylinePoints();
+                    });
+                    Navigator.pop(context);
+                  },
                 ),
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                child: const Text('OK'),
-
-                style:ElevatedButton.styleFrom(
-
-                    primary:Color(0xFF442268) ,
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    textStyle:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
-                ),
-
-                onPressed: () {
-                  print(_startAddressController.text);
-                  print(_endAddressController.text);
-
-                },
               ),
               SizedBox(height: 16),
             ],
@@ -188,60 +207,59 @@ class _LocationPageState extends State<LocationPage> {
     );
   }
 
+  Set<Marker> _markers = {};
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId('dest'),
+          position: destLocation,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          infoWindow: InfoWindow(
+            title: 'Destination',
+            snippet: 'This is the destination location',
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Google Map",
-          style: TextStyle(color: Colors.black, fontSize: 16),
-        ),
+        title: Text('Location Page'),
       ),
       body: _currentLocation == null
-          ? const Center(child: Text("Loading"))
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
           : GoogleMap(
+        onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(
             _currentLocation!.latitude!,
             _currentLocation!.longitude!,
           ),
-          zoom: 13,
+          zoom: 14.0,
         ),
-        markers: {
-          Marker(
-            markerId: const MarkerId("currentLocation"),
-            position: LatLng(
-              _currentLocation!.latitude!,
-              _currentLocation!.longitude!,
-            ),
-            onTap: () async {
-              final String address =
-              await _getAddressFromLatLng(LatLng(_currentLocation!.latitude!,
-                  _currentLocation!.longitude!));
-              setState(() {
-                _startAddressController.text = address;
-              });
-            },
-          ),
-          Marker(
-            markerId: const MarkerId("dest"),
-            position: destLocation,
-            icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueBlue),
-          ),
-        },
+        markers: _markers,
         polylines: {
           Polyline(
-            polylineId: const PolylineId("route"),
+            polylineId: PolylineId('polyline'),
+            color: Colors.blue,
             points: _polylineCoordinates,
-            color: const Color(0xFF442268),
-          )
+          ),
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openLocationSheet,
-        child: Icon(Icons.location_on),
+        tooltip: 'Get Location',
+        child: Icon(Icons.add_location),
       ),
     );
   }
 }
+
+const String google_api = "AIzaSyCUYrep7m7CTr3UIfrBdJh3itnbeuKEwM8";

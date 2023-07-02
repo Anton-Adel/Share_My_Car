@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Drivers/Home.dart';
+
+import 'package:gp/trip/presentation/screens/Drivers/Home.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
-import 'package:gp/user/presentation/screens/CarInfo.dart';
+import 'package:gp/user/presentation/screens/Register/CarInfo.dart';
 import 'package:gp/core/base_usecase.dart';
 import 'package:gp/map/location.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -21,11 +22,11 @@ import 'package:gp/user/domain/repository/base_user_repository.dart';
 import 'package:gp/user/domain/usecase/user_get_all_usecase.dart';
 import 'package:gp/user/domain/usecase/user_get_usecase.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
-import 'package:gp/user/presentation/screens/Properties.dart';
+import 'package:gp/user/presentation/screens/Register/Properties.dart';
 import 'core/bloc_observer.dart';
-import 'user/presentation/screens/LoginPage.dart';
-import 'user/presentation/screens/SignupPage.dart';
-import 'user/presentation/screens/Verfication.dart';
+import 'user/presentation/screens/Login/LoginPage.dart';
+import 'user/presentation/screens/Register/SignupPage.dart';
+import 'user/presentation/screens/Register/Verfication.dart';
 
 void main() async {
   // BaseUserRemoteDataSource baseUserRemoteDataSource=UserRemoteDataSource();
@@ -39,6 +40,20 @@ void main() async {
   await tripDeleteUseCase(Parameter_delete(
       id: 3
   ));*/
+  BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  BaseTripRepository baseTripRepository =
+  TripRepository(baseUserRemoteDataSource);
+  TripCreateUseCase tripCreateUseCase = TripCreateUseCase(baseTripRepository);
+  await tripCreateUseCase(Parameter_trip_create(
+      start_location: "start_address",
+      end_location: "end_address",
+      start_time: "2:40",
+      user_id: "19",
+      user_cluster: "1",
+      start_date: "2023-2-2",
+      shared_seats: "0",
+      end_time: "0:0"
+  ));
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -56,7 +71,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:SignUpPage(),
+        home:LoginPage(),
       ),
     );
   }

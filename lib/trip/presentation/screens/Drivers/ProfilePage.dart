@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gp/Drivers/Home.dart';
+
+import 'Home.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -158,30 +160,28 @@ class _ProfilePageState extends State<ProfilePage> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                                  child: Expanded(
-                                    child: RatingBar(
-                                        initialRating: 0,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemSize: 35,
-                                        ratingWidget: RatingWidget(
-                                            full: const Icon(Icons.star,
-                                                color: Colors.orange),
-                                            half: const Icon(
-                                              Icons.star_half,
-                                              color: Colors.orange,
-                                            ),
-                                            empty: const Icon(
-                                              Icons.star_outline,
-                                              color: Colors.orange,
-                                            )),
-                                        onRatingUpdate: (value) {
-                                          setState(() {
-                                            _ratingValue = value;
-                                          });
-                                        }),
-                                  ),
+                                  child: RatingBar(
+                                      initialRating: 0,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemSize: 35,
+                                      ratingWidget: RatingWidget(
+                                          full: const Icon(Icons.star,
+                                              color: Colors.orange),
+                                          half: const Icon(
+                                            Icons.star_half,
+                                            color: Colors.orange,
+                                          ),
+                                          empty: const Icon(
+                                            Icons.star_outline,
+                                            color: Colors.orange,
+                                          )),
+                                      onRatingUpdate: (value) {
+                                        setState(() {
+                                          _ratingValue = value;
+                                        });
+                                      }),
                                 ),
                               ],
                             ),
@@ -190,20 +190,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children:const  [
+                              children: const [
                                 Text(
                                   "Name: ",
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    "Eslam Khaled Eid",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF442268)),
-                                  ),
+                                Text(
+                                  "Eslam Khaled Eid",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF442268)),
                                 ),
                               ],
                             ),
@@ -218,31 +216,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                 Text(
+                                Text(
                                   "22",
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w300,
                                       color: Color(0xFF442268)),
                                 ),
-                                // SizedBox(
-                                //   wid
-                                //  th: 165,
-                                // ),
-                                Spacer(),
-                                 Text(
+                                SizedBox(
+                                  width: 165,
+                                ),
+                                Text(
                                   "Gender: ",
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    "Male",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF442268)),
-                                  ),
+                                Text(
+                                  "Male",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF442268)),
                                 ),
                               ],
                             ),
@@ -251,19 +245,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Row(
                               children: const [
-                               Text(
+                                Text(
                                   "Phone number: ",
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    "01064643135",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF442268)),
-                                  ),
+                                Text(
+                                  "01064643135",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF442268)),
                                 ),
                               ],
                             ),
@@ -277,14 +269,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    "Grey | Peugeot 3008",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF442268)),
-                                  ),
+                                Text(
+                                  "Grey | Peugeot 3008",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF442268)),
                                 ),
                               ],
                             ),
@@ -292,8 +282,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 5,
                             ),
                             Row(
-                              children:  [
-                               const Text(
+                              children: const [
+                                Text(
                                   "Distance: ",
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
@@ -305,20 +295,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                       fontWeight: FontWeight.w300,
                                       color: Color(0xFF442268)),
                                 ),
-                                Spacer(),
+                                SizedBox(
+                                  width: 100,
+                                ),
                                 Text(
                                   "Time: ",
                                   style: TextStyle(
                                       fontSize: 25, fontWeight: FontWeight.w400),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    "10min",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF442268)),
-                                  ),
+                                Text(
+                                  "10min",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF442268)),
                                 ),
                               ],
                             ),
@@ -333,7 +323,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       // car image
                       Row(
                         children: [
-                          Expanded(
+                          Center(
                             child: Container(
                                 alignment: Alignment.center,
                                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -368,10 +358,29 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        Image.asset('assets/OIP (1).jpeg',height: 250,width: 300,),
+                      Row(children: [
+                        IconButton(
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            ),
+                            onPressed: () {Navigator.pop(context);}),
+                        Column(
+                          children: [
+                            Image.asset('assets/OIP (1).jpeg',height: 250,width: 300,),
+                            const Text('1/2',style: TextStyle(color: Color(0xFF442268),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),)
+                          ],
+                        ),
+                        IconButton(
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            ),
+                            onPressed: () {Navigator.pop(context);}),
                       ],),
 
                       // license image
@@ -398,7 +407,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontWeight: FontWeight.w500),
                             ),
                           ),
-                          Expanded(
+                          Center(
                             child: Container(
                                 alignment: Alignment.center,
                                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -412,11 +421,29 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        Image.asset('assets/download.jpeg',height: 250,width: 300,),
-
+                      Row(children: [
+                        IconButton(
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            ),
+                            onPressed: () {Navigator.pop(context);}),
+                        Column(
+                          children: [
+                            Image.asset('assets/download.jpeg',height: 250,width: 300,),
+                            const Text('1/2',style: TextStyle(color: Color(0xFF442268),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),)
+                          ],
+                        ),
+                        IconButton(
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            ),
+                            onPressed: () {Navigator.pop(context);}),
                       ],),
                     ],
                   ),
@@ -451,7 +478,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Expanded(
+                  Center(
                     child: Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),

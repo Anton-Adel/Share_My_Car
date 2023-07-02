@@ -15,6 +15,8 @@ class TripEntity extends Equatable {
   String? end_time;
   final int user_id;
   final String user_cluster;
+  final String start_date;
+  String? shared_seats;
 
 
    TripEntity({
@@ -24,7 +26,9 @@ class TripEntity extends Equatable {
     required this.start_time,
      this.end_time,
     required this.user_id,
-     required this.user_cluster
+     required this.user_cluster,
+     required this.start_date,
+     this.shared_seats
   });
 
   @override
@@ -37,7 +41,9 @@ class TripEntity extends Equatable {
         start_time,
         end_time,
         user_id,
-        user_cluster
+        user_cluster,
+        start_date,
+        shared_seats
       ];
 
 

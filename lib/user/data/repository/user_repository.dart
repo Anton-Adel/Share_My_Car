@@ -9,6 +9,8 @@ import 'package:gp/user/data/model/user_model.dart';
 import 'package:gp/user/domain/entity/user_entity.dart';
 import 'package:gp/user/domain/repository/base_user_repository.dart';
 
+import '../../../core/shared_components/Constants.dart';
+
 class UserRepository extends BaseUserRepository{
   final BaseUserRemoteDataSource baseUserRemoteDataSource;
 
@@ -52,7 +54,7 @@ class UserRepository extends BaseUserRepository{
 //لازم ارن الlaravel علي بورت 9000و 0.0.0.0
   @override
   Future<Either<Failure, UserEntity>> userLogin({required String email,required String password}) async {
-    var respons= await baseUserRemoteDataSource.postRequest("http://192.168.1.186:9000/api/login", {
+    var respons= await baseUserRemoteDataSource.postRequest("$PATH/login", {
       "email": email,
       "password":password
     });

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/user/presentation/screens/SignupPage.dart';
+import 'package:gp/user/presentation/screens/Register/SignupPage.dart';
 import 'package:gp/user/presentation/controller/login/login_cubit.dart';
 import 'package:gp/user/presentation/controller/login/login_states.dart';
 

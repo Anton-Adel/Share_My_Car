@@ -5,6 +5,7 @@ import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 
 import 'package:gp/trip/presentation/screens/Drivers/Home.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
+import 'package:gp/user/presentation/controller/login/login_cubit.dart';
 import 'package:gp/user/presentation/screens/Register/CarInfo.dart';
 import 'package:gp/core/base_usecase.dart';
 import 'package:gp/map/location.dart';
@@ -25,6 +26,7 @@ import 'package:gp/user/domain/usecase/user_get_usecase.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
 import 'package:gp/user/presentation/screens/Register/Properties.dart';
 import 'core/bloc_observer.dart';
+import 'core/shared_components/Constants.dart';
 import 'user/presentation/screens/Login/LoginPage.dart';
 import 'user/presentation/screens/Register/SignupPage.dart';
 import 'user/presentation/screens/Register/Verfication.dart';
@@ -55,6 +57,19 @@ void main() async {
   //     shared_seats: "0",
   //     end_time: "0:0"
   // ));
+  // emit(RegisterSendCodeLoadingState());
+  // BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  // baseUserRemoteDataSource.postRequest("$PATH/sendcode", {
+  //   "first_name": "userPostModel!.first_name",
+  //   "last_name":" userPostModel!.last_name",
+  //   "email": "antonadel6114@gmail.com"
+  // });
+
+  // BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  // BaseUserRepository baseUserRepository =
+  // UserRepository(baseUserRemoteDataSource);
+  // UserLoginUseCase userLoginUseCase = UserLoginUseCase(baseUserRepository);
+  // userLoginUseCase(Parameter_login(email: "anton0001@gmail.com", password: "1234567891"));
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -69,11 +84,12 @@ class MyApp extends StatelessWidget {
       providers: [
 
         BlocProvider(create: (context)=>RegisterCubit()),
-        BlocProvider(create: (context)=>TripCubit())
+        BlocProvider(create: (context)=>TripCubit()),
+        BlocProvider(create: (context)=>LoginCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:SignUpPage(),
+        home:HomePage(),
       ),
     );
   }

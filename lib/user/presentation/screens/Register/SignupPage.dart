@@ -9,6 +9,7 @@ import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 import 'package:gp/trip/presentation/controller/trip_state.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
+import 'package:gp/user/presentation/screens/Register/Properties.dart';
 import 'package:intl/intl.dart';
 import 'package:gp/user/presentation/screens/Register/CarInfo.dart';
 
@@ -20,21 +21,9 @@ import 'Verfication.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
-  TextEditingController fnameController = TextEditingController();
-  TextEditingController lnameController = TextEditingController();
 
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController CountryController = TextEditingController();
-  TextEditingController CityController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController idController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  File? PersonalImage;
-  File? CardImage;
+
 
   // have a car or not
 
@@ -116,7 +105,7 @@ class SignUpPage extends StatelessWidget {
                               height: 85,
                               padding: const EdgeInsets.all(20),
                               child: TextFormField(
-                                controller: fnameController,
+                                controller: cubit.fnameController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'first name must not be empty';
@@ -138,7 +127,7 @@ class SignUpPage extends StatelessWidget {
                               height: 85,
                               padding: const EdgeInsets.all(20),
                               child: TextFormField(
-                                controller: lnameController,
+                                controller: cubit.lnameController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'last name must not be empty';
@@ -247,7 +236,7 @@ class SignUpPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          controller: ageController,
+                          controller: cubit.ageController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Age must not be empty';
@@ -303,7 +292,7 @@ class SignUpPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          controller: idController,
+                          controller: cubit.idController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'id number for car must not be empty';
@@ -343,10 +332,10 @@ class SignUpPage extends StatelessWidget {
                               // hoverColor: const Color(0xFFCF283C),
                               iconSize: 30,
                               onPressed: () async {
-                                PersonalImage = await get_image();
-                                print(File(PersonalImage!.path).toString());
+                                cubit.PersonalImage = await get_image();
+                                print(File(cubit.PersonalImage!.path).toString());
                                 cubit.display_image_name((Uri
-                                    .file(PersonalImage!.path)
+                                    .file(cubit.PersonalImage!.path)
                                     .pathSegments
                                     .last).toString(), cubit.personalImage);
                               },
@@ -378,9 +367,9 @@ class SignUpPage extends StatelessWidget {
                               // hoverColor: const Color(0xFFCF283C),
                               iconSize: 30,
                               onPressed: () async {
-                                CardImage = await get_image();
+                                cubit.CardImage = await get_image();
                                 cubit.display_image_name((Uri
-                                    .file(CardImage!.path)
+                                    .file(cubit.CardImage!.path)
                                     .pathSegments
                                     .last).toString(), cubit.idCardImage);
                               },
@@ -446,7 +435,7 @@ class SignUpPage extends StatelessWidget {
                         height: 85,
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
-                          controller: emailController,
+                          controller: cubit.emailController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'email must not be empty';
@@ -467,7 +456,7 @@ class SignUpPage extends StatelessWidget {
                         height: 85,
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
-                          controller: passwordController,
+                          controller: cubit.passwordController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'password must not be empty';
@@ -490,7 +479,7 @@ class SignUpPage extends StatelessWidget {
                         height: 85,
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
-                          controller: CountryController,
+                          controller: cubit.CountryController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Country must not be empty';
@@ -511,7 +500,7 @@ class SignUpPage extends StatelessWidget {
                         height: 85,
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
-                          controller: CityController,
+                          controller: cubit.CityController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'City must not be empty';
@@ -544,6 +533,10 @@ class SignUpPage extends StatelessWidget {
                                 if (value!.isEmpty) {
                                   return 'address must not be empty';
                                 }
+                                else
+                                  {
+                                    cubit.addressController.text=TripCubit.get(context).startAddressController.text;
+                                  }
                               },
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
@@ -578,7 +571,7 @@ class SignUpPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          controller: phoneController,
+                          controller: cubit.phoneController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'phone number must not be empty';
@@ -717,7 +710,7 @@ class SignUpPage extends StatelessWidget {
                                 (cubit.check_car) &&
                                 cubit.gender != null) {
                               String user_age = "0";
-                              var age = int.parse(ageController.text);
+                              var age = int.parse(cubit.ageController.text);
                               if (age >= 16 && age < 25) {
                                 user_age = "Young";
                               }
@@ -727,21 +720,21 @@ class SignUpPage extends StatelessWidget {
                               else
                                 user_age = "Old";
                               cubit.userPostModel = UserPostModel(
-                                first_name: fnameController.text,
-                                last_name: lnameController.text,
+                                first_name: cubit.fnameController.text,
+                                last_name: cubit.lnameController.text,
                                 gender: cubit.gender!,
                                 age: user_age,
-                                id_number: idController.text,
-                                email: emailController.text,
-                                country: CountryController.text,
-                                city: CityController.text,
-                                address: addressController.text,
-                                password: passwordController.text,
-                                phone_number: phoneController.text,
+                                id_number: cubit.idController.text,
+                                email: cubit.emailController.text,
+                                country: cubit.CountryController.text,
+                                city: cubit.CityController.text,
+                                address: cubit.addressController.text,
+                                password: cubit.passwordController.text,
+                                phone_number: cubit.phoneController.text,
                                 have_car: cubit.have_car ? "1" : "0",
-
-                                personal_image: PersonalImage,
-                                card_image: CardImage,
+                                cluster_number: "1",
+                                personal_image: cubit.PersonalImage,
+                                card_image: cubit.CardImage,
                               );
                               print(cubit.userPostModel?.city);
                               if (cubit.have_car == true) {
@@ -756,7 +749,7 @@ class SignUpPage extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => verfication()));
+                                        builder: (context) => PropertiesPage()));
                               }
                             } else {
                               print("please enter gender");

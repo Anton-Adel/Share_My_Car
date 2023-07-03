@@ -11,16 +11,7 @@ import '../../../../core/shared_components/shared.dart';
 
 class CarInfo extends StatelessWidget {
   CarInfo({Key? key}) : super(key: key);
-  TextEditingController carmodel = TextEditingController();
-  TextEditingController carcolor = TextEditingController();
-  TextEditingController carplatenumber = TextEditingController();
 
-  TextEditingController carseatnumber = TextEditingController();
-
-
-  File? CarImage;
-  File? paletImage;
-  File? licenseImage;
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -92,35 +83,37 @@ class CarInfo extends StatelessWidget {
 
                       // car model & car color
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            width: 200,
-                            height: 85,
-                            padding: const EdgeInsets.all(20),
-                            child: TextFormField(
-                              controller: carmodel,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'please enter car model';
-                                }
-                              },
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Car Model',
-                                labelStyle: TextStyle(
-                                    color: Color(0xFF836D9A),
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20),
+                          Expanded(
+                            child: Container(
+
+                              padding: const EdgeInsets.only(top: 20,right: 20,bottom: 20),
+                              child: TextFormField(
+                                controller: cubit.carmodel,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter car model';
+                                  }
+                                },
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Car Model',
+                                  labelStyle: TextStyle(
+                                      color: Color(0xFF836D9A),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20),
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
-                              width: 200,
-                              height: 85,
-                              padding: const EdgeInsets.all(20),
+
+                              padding: const EdgeInsets.only(top: 20,left: 20,bottom: 20),
+
                               child: TextFormField(
-                                controller: carcolor,
+                                controller: cubit.carcolor,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter car color';
@@ -150,7 +143,7 @@ class CarInfo extends StatelessWidget {
                         height: 55,
                         padding: const EdgeInsets.all(3),
                         child: TextFormField(
-                          controller: carplatenumber,
+                          controller: cubit.carplatenumber,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'please enter car plate number';
@@ -177,7 +170,7 @@ class CarInfo extends StatelessWidget {
                         padding: const EdgeInsets.all(3),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          controller: carseatnumber,
+                          controller: cubit.carseatnumber,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'please enter car seat number';
@@ -201,8 +194,7 @@ class CarInfo extends StatelessWidget {
 
                       // upload car image
                       Container(
-                        width: 370,
-                        height: 55,
+
                         padding: const EdgeInsets.all(3),
                         child: TextFormField(
                           controller: cubit.carimage,
@@ -223,9 +215,9 @@ class CarInfo extends StatelessWidget {
                               splashColor: const Color(0xFFCF283C),
                               iconSize: 30,
                               onPressed: () async {
-                                CarImage = await get_image();
-                                print(File(CarImage!.path).toString());
-                                cubit.display_image_name((Uri.file(CarImage!.path).pathSegments.last).toString(),cubit.carimage);
+                                cubit.CarImage = await get_image();
+                                print(File(cubit.CarImage!.path).toString());
+                                cubit.display_image_name((Uri.file(cubit.CarImage!.path).pathSegments.last).toString(),cubit.carimage);
                               },
                               icon: const Icon(Icons.add_photo_alternate),
                             ),
@@ -241,8 +233,7 @@ class CarInfo extends StatelessWidget {
 
                       // upload car plate image
                       Container(
-                        width: 370,
-                        height: 55,
+
                         padding: const EdgeInsets.all(3),
                         child: TextFormField(
                           controller: cubit.carplateimage,
@@ -263,9 +254,9 @@ class CarInfo extends StatelessWidget {
                               splashColor: const Color(0xFFCF283C),
                               iconSize: 30,
                               onPressed: () async{
-                                paletImage = await get_image();
-                                print(File(paletImage!.path).toString());
-                                cubit.display_image_name((Uri.file(paletImage!.path).pathSegments.last).toString(),cubit.carplateimage);
+                                cubit.paletImage = await get_image();
+                                print(File(cubit.paletImage!.path).toString());
+                                cubit.display_image_name((Uri.file(cubit.paletImage!.path).pathSegments.last).toString(),cubit.carplateimage);
                               },
                               icon: const Icon(Icons.add_photo_alternate),
                             ),
@@ -280,8 +271,7 @@ class CarInfo extends StatelessWidget {
 
                       // upload licence car image
                       Container(
-                        width: 370,
-                        height: 55,
+
                         padding: const EdgeInsets.all(3),
                         child: TextFormField(
                           controller: cubit.carlicenseimage,
@@ -302,9 +292,9 @@ class CarInfo extends StatelessWidget {
                               splashColor: const Color(0xFFCF283C),
                               iconSize: 30,
                               onPressed: () async{
-                                licenseImage = await get_image();
-                                print(File(licenseImage!.path).toString());
-                                cubit.display_image_name((Uri.file(licenseImage!.path).pathSegments.last).toString(),cubit.carlicenseimage);
+                                cubit.licenseImage = await get_image();
+                                print(File(cubit.licenseImage!.path).toString());
+                                cubit.display_image_name((Uri.file(cubit.licenseImage!.path).pathSegments.last).toString(),cubit.carlicenseimage);
                               },
                               icon: const Icon(Icons.add_photo_alternate),
                             ),
@@ -327,12 +317,12 @@ class CarInfo extends StatelessWidget {
                                 fontSize: 30, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            cubit.userPostModel?.car_model= carmodel.text;
-                            cubit.userPostModel?.car_color= carcolor.text;
-                            cubit.userPostModel?.car_plate_number= carplatenumber.text;
-                            cubit.userPostModel?.car_image=CarImage;
-                            cubit.userPostModel?.car_plate_image=paletImage;
-                            cubit.userPostModel?.car_license_image=licenseImage;
+                            cubit.userPostModel?.car_model= cubit.carmodel.text;
+                            cubit.userPostModel?.car_color= cubit.carcolor.text;
+                            cubit.userPostModel?.car_plate_number= cubit.carplatenumber.text;
+                            cubit.userPostModel?.car_image=cubit.CarImage;
+                            cubit.userPostModel?.car_plate_image=cubit.paletImage;
+                            cubit.userPostModel?.car_license_image=cubit.licenseImage;
 
                             print(cubit.userPostModel?.city);
                             // print(carcolor.text);

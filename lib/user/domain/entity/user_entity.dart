@@ -3,10 +3,9 @@
 import 'package:equatable/equatable.dart';
 
 
-
 class UserEntity extends Equatable {
 
-  // final String token;  // هناخده ك shared preference in login
+  final String token; // هناخده ك shared preference in login
   final int id;
   final String first_name;
   final String last_name;
@@ -21,12 +20,12 @@ class UserEntity extends Equatable {
   final String address;
   final String phone_number;
   final int have_car;
-   String? car_model;
-   String? car_color;
-   String? car_plate_number;
-   String? car_image;
-   String? car_plate_image;
-   String? car_license_image;
+  String? car_model;
+  String? car_color;
+  String? car_plate_number;
+  String? car_image;
+  String? car_plate_image;
+  String? car_license_image;
   final String trip_gender;
   final int smoke;
   final int trip_smoke;
@@ -66,7 +65,8 @@ class UserEntity extends Equatable {
     required this.trip_children,
     required this.trip_pets,
     this.car_seats,
-    this.cluster_number
+    this.cluster_number,
+    required this.token
   });
 
   @override
@@ -82,7 +82,7 @@ class UserEntity extends Equatable {
         personal_image,
         card_image,
         email,
-
+        token,
         country,
         city,
         address,

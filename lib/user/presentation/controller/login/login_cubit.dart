@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/core/error/failure.dart';
+import 'package:gp/core/shared_components/Constants.dart';
 import 'package:gp/user/data/model/user_model.dart';
 import 'package:gp/user/domain/usecase/user_login_usecase.dart';
 import 'package:gp/user/presentation/controller/login/login_states.dart';
@@ -32,6 +33,8 @@ class LoginCubit extends Cubit<LoginState> {
       }, (r) {
         print(r.id);
         userModel = r as UserModel?;
+         Token+=userModel!.token;
+         print(Token);
         emit(LoginSuccessState());
       });
     }).catchError((e) {

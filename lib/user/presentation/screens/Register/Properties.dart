@@ -18,7 +18,7 @@ class PropertiesPage extends StatelessWidget {
       listener: (context, state) {
         if(state is RegisterSendCodeSuccessState)
           {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context) =>
                         verfication()));
@@ -37,7 +37,7 @@ class PropertiesPage extends StatelessWidget {
                       // text signup
                       Container(
                         color: Colors.white,
-                        padding: const EdgeInsets.fromLTRB(0, 50, 0, 50),
+                        padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
                         alignment: Alignment.center,
                         width: double.infinity,
                         child: Row(
@@ -86,12 +86,14 @@ class PropertiesPage extends StatelessWidget {
                         children: [
                           Row(
                             children: const [
-                              Text(
-                                "Gender you want to share your trip with",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color(0xFF442268),
-                                    fontWeight: FontWeight.w300),
+                              Expanded(
+                                child: Text(
+                                  "Gender you want to share your trip with",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xFF442268),
+                                      fontWeight: FontWeight.w300),
+                                ),
                               )
                             ],
                           ),
@@ -193,56 +195,58 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q2,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 2);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q2,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 2);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q2,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 2);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q2,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 2);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -263,56 +267,58 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q3,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 3);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q3,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 3);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q3,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 3);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q3,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 3);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -333,56 +339,59 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q4,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value,4);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q4,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value,4);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q4,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value,4);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ), 
+                              
+                              Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q4,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value,4);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -403,56 +412,58 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q5,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 5);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q5,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 5);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q5,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 5);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                             Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q5,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 5);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -473,56 +484,58 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q6,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 6);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q6,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 6);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q6,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 6);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q6,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 6);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -543,60 +556,62 @@ class PropertiesPage extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "yes",
+                                          groupValue: cubit.Q7,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 7);
+                                          }),
                                     ),
-                                    child: Radio(
-                                        value: "yes",
-                                        groupValue: cubit.Q7,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 7);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 145,
-                              ),
-                              Row(
-                                children: [
-                                  Theme(
-                                    data: ThemeData(
-                                      primarySwatch: Colors.deepPurple,
-                                      unselectedWidgetColor:
-                                      const Color(0xFF442268), // Your color
+                                    const Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
                                     ),
-                                    child: Radio(
-                                        value: "no",
-                                        groupValue: cubit.Q7,
-                                        onChanged: (String? value) {
-                                          cubit.get_question_value(value, 7);
-                                        }),
-                                  ),
-                                  const Text(
-                                    'No',
-                                    style: TextStyle(
-                                        color: Color(0xFF836D9A),
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Theme(
+                                      data: ThemeData(
+                                        primarySwatch: Colors.deepPurple,
+                                        unselectedWidgetColor:
+                                        const Color(0xFF442268), // Your color
+                                      ),
+                                      child: Radio(
+                                          value: "no",
+                                          groupValue: cubit.Q7,
+                                          onChanged: (String? value) {
+                                            cubit.get_question_value(value, 7);
+                                          }),
+                                    ),
+                                    const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xFF836D9A),
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(height: 5,),
 
                           // button Next
                           const Padding(padding: EdgeInsets.all(10)),

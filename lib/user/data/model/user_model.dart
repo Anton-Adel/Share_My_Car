@@ -30,7 +30,7 @@ class UserModel extends UserEntity {
     required super.trip_children,
     required super.trip_pets,
      super.car_seats,
-     super.cluster_number,
+     super.cluster_number, required super.token,
     });
 
   factory UserModel.fromjson(Map<String, dynamic> json)
@@ -65,7 +65,8 @@ class UserModel extends UserEntity {
           trip_children: json['trip_children'],
           trip_pets: json['trip_pets'],
         car_seats: json['car_seats'],
-        cluster_number: json['cluster_number']
+        cluster_number: json['cluster_number'],
+       token: json['token']
       );
 
 

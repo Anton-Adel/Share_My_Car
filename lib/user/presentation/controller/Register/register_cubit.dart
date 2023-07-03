@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +35,33 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController carplateimage = TextEditingController();
   TextEditingController carlicenseimage = TextEditingController();
 
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController CountryController = TextEditingController();
+  TextEditingController CityController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController idController = TextEditingController();
+  File? PersonalImage;
+  File? CardImage;
+
+
+  // car info
+  TextEditingController carmodel = TextEditingController();
+  TextEditingController carcolor = TextEditingController();
+  TextEditingController carplatenumber = TextEditingController();
+
+  TextEditingController carseatnumber = TextEditingController();
+
+
+  File? CarImage;
+  File? paletImage;
+  File? licenseImage;
 
   String? Q1;
   String? Q2;
@@ -78,7 +107,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     try {
       emit(RegisterSendCodeLoadingState());
       BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
-      baseUserRemoteDataSource.postRequest("$Path/sendcode", {
+      baseUserRemoteDataSource.postRequest("$PATH/sendcode", {
         "first_name": userPostModel!.first_name,
         "last_name": userPostModel!.last_name,
         "email": userPostModel!.email

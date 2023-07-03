@@ -319,6 +319,8 @@ class _LocationPageState extends State<LocationPage> {
   builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF442268),
+
         title: Text('Location Page'),
       ),
       body: _currentLocation == null

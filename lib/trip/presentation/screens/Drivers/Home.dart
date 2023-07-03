@@ -5,11 +5,13 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gp/Notifications/NotificationsPage.dart';
 import 'package:gp/trip/presentation/controller/trip_cubit.dart';
+import 'package:gp/user/presentation/controller/login/login_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../AboutUS/AboutUS.dart';
 import '../../../../Riders/RidersListPage.dart';
 import '../../../../Setting/SettingPage.dart';
+import '../../../../core/shared_components/Constants.dart';
 import '../../../../map/location.dart';
 import '../../../../user/presentation/screens/Login/LoginPage.dart';
 import '../../../../user/presentation/screens/Register/SignupPage.dart';
@@ -61,9 +63,10 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) { //انا هنا شيلت ال كيوبت وخليته عام علشان هستخدمه في صفحه اللوكاشن
     return BlocConsumer<TripCubit, TripStates>(
     listener: (context, state) {
-      // TODO: implement listener
+
     },
     builder: (context, state) {
+      var cubit= TripCubit.get(context);
       return DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage>
                 iconTheme: const IconThemeData(color: Color(0xFF442268)),
                 centerTitle: true,
                 title: const Text(
-                  'Drivers',
+                  'Home',
                   style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -83,72 +86,72 @@ class _HomePageState extends State<HomePage>
                 ),
                 actions: <Widget>[
                   // cancel Icon
-                  IconButton(
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Color(0xFF442268),
-                      ),
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                                contentPadding: const EdgeInsets.all(20),
-                                actionsPadding:
-                                    const EdgeInsets.fromLTRB(0, 0, 65, 30),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor: const Color(0XFF2A1540),
-                                contentTextStyle: const TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                                title: const Text(
-                                  'Cancel',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                content: const Text(
-                                    'You will cancel the trip and go to home. Are you sure?'),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, 'Yes'),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: const Color(0XFFD4C9D6),
-                                        padding: EdgeInsets.all(11),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        textStyle: const TextStyle(
-                                          color: Color(0xFF442268),
-                                        )),
-                                    child: const Text('Yes',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Color(0xFF442268),
-                                        )),
-                                  ),
-                                  const SizedBox(
-                                    width: 50,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () => Navigator.pop(context, 'No'),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: const Color(0XFFD4C9D6),
-                                        padding: EdgeInsets.all(11),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        textStyle: const TextStyle(
-                                          color: Color(0xFF442268),
-                                        )),
-                                    child: const Text(
-                                      'No',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color(0xFF442268),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )))
+                  // IconButton(
+                  //     icon: const Icon(
+                  //       Icons.delete,
+                  //       color: Color(0xFF442268),
+                  //     ),
+                  //     onPressed: () => showDialog(
+                  //         context: context,
+                  //         builder: (BuildContext context) => AlertDialog(
+                  //               contentPadding: const EdgeInsets.all(20),
+                  //               actionsPadding:
+                  //                   const EdgeInsets.fromLTRB(0, 0, 65, 30),
+                  //               shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(15)),
+                  //               backgroundColor: const Color(0XFF2A1540),
+                  //               contentTextStyle: const TextStyle(
+                  //                   color: Colors.white, fontSize: 20),
+                  //               title: const Text(
+                  //                 'Cancel',
+                  //                 style: TextStyle(
+                  //                     color: Colors.white, fontSize: 20),
+                  //               ),
+                  //               content: const Text(
+                  //                   'You will cancel the trip and go to home. Are you sure?'),
+                  //               actions: [
+                  //                 ElevatedButton(
+                  //                   onPressed: () =>
+                  //                       Navigator.pop(context, 'Yes'),
+                  //                   style: ElevatedButton.styleFrom(
+                  //                       primary: const Color(0XFFD4C9D6),
+                  //                       padding: EdgeInsets.all(11),
+                  //                       shape: RoundedRectangleBorder(
+                  //                           borderRadius:
+                  //                               BorderRadius.circular(15)),
+                  //                       textStyle: const TextStyle(
+                  //                         color: Color(0xFF442268),
+                  //                       )),
+                  //                   child: const Text('Yes',
+                  //                       style: TextStyle(
+                  //                         fontSize: 20,
+                  //                         color: Color(0xFF442268),
+                  //                       )),
+                  //                 ),
+                  //                 const SizedBox(
+                  //                   width: 50,
+                  //                 ),
+                  //                 ElevatedButton(
+                  //                   onPressed: () => Navigator.pop(context, 'No'),
+                  //                   style: ElevatedButton.styleFrom(
+                  //                       primary: const Color(0XFFD4C9D6),
+                  //                       padding: EdgeInsets.all(11),
+                  //                       shape: RoundedRectangleBorder(
+                  //                           borderRadius:
+                  //                               BorderRadius.circular(15)),
+                  //                       textStyle: const TextStyle(
+                  //                         color: Color(0xFF442268),
+                  //                       )),
+                  //                   child: const Text(
+                  //                     'No',
+                  //                     style: TextStyle(
+                  //                       fontSize: 20,
+                  //                       color: Color(0xFF442268),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             )))
                 ],
                 backgroundColor: const Color(0xFFFAFAFA),
 
@@ -168,7 +171,13 @@ class _HomePageState extends State<HomePage>
                       isScrollable: true,
                       physics: const BouncingScrollPhysics(),
                       onTap: (int index) {
+
                         print('Tab $index is tapped');
+                        if(index==1)
+                          {
+                            cubit.startAddressController.clear();
+                            cubit.endAddressController.clear();
+                          }
                       },
                       enableFeedback: true,
                       // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
@@ -193,19 +202,24 @@ class _HomePageState extends State<HomePage>
                       //mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.account_circle_sharp,
-                              color: Colors.white,
-                              size: 80,
-                            )),
+                        // IconButton(
+                        //     onPressed: () {},
+                        //     icon: const Icon(
+                        //       Icons.account_circle_sharp,
+                        //       color: Colors.white,
+                        //       size: 80,
+                        //     )),
+                        CircleAvatar(
+                          radius: 35,
+                         //backgroundColor: Colors.black,
+                          backgroundImage: NetworkImage("$ImagePath${LoginCubit.get(context).userModel?.personal_image}"),
+                        ),
                         const SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
                         // Padding(padding: EdgeInsets.all(25)),
-                        const Text(
-                          "Username@gmail.com",
+                         Text(
+                          "${LoginCubit.get(context).userModel?.email}",
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         )
                       ],

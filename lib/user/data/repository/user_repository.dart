@@ -19,7 +19,7 @@ class UserRepository extends BaseUserRepository{
 
   //192.168.1.185
   Future<Either<Failure, UserEntity>> userGet({required int user_id}) async {
-    var respons= await baseUserRemoteDataSource.getRequest("http://192.168.1.10:9000/api/user/${user_id}");
+    var respons= await baseUserRemoteDataSource.getRequest("$PATH/user/${user_id}");
     try
     {
       //print(respons);

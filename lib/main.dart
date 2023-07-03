@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 
 import 'package:gp/trip/presentation/screens/Drivers/Home.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
@@ -40,20 +41,20 @@ void main() async {
   await tripDeleteUseCase(Parameter_delete(
       id: 3
   ));*/
-  BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
-  BaseTripRepository baseTripRepository =
-  TripRepository(baseUserRemoteDataSource);
-  TripCreateUseCase tripCreateUseCase = TripCreateUseCase(baseTripRepository);
-  await tripCreateUseCase(Parameter_trip_create(
-      start_location: "start_address",
-      end_location: "end_address",
-      start_time: "2:40",
-      user_id: "19",
-      user_cluster: "1",
-      start_date: "2023-2-2",
-      shared_seats: "0",
-      end_time: "0:0"
-  ));
+  // BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  // BaseTripRepository baseTripRepository =
+  // TripRepository(baseUserRemoteDataSource);
+  // TripCreateUseCase tripCreateUseCase = TripCreateUseCase(baseTripRepository);
+  // await tripCreateUseCase(Parameter_trip_create(
+  //     start_location: "start_address",
+  //     end_location: "end_address",
+  //     start_time: "2:40",
+  //     user_id: "19",
+  //     user_cluster: "1",
+  //     start_date: "2023-2-2",
+  //     shared_seats: "0",
+  //     end_time: "0:0"
+  // ));
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -67,11 +68,12 @@ class MyApp extends StatelessWidget {
 
       providers: [
 
-        BlocProvider(create: (context)=>RegisterCubit())
+        BlocProvider(create: (context)=>RegisterCubit()),
+        BlocProvider(create: (context)=>TripCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:LoginPage(),
+        home:SignUpPage(),
       ),
     );
   }

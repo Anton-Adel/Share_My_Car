@@ -5,12 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/core/global_models/user_post_model.dart';
 import 'package:gp/core/shared_components/shared.dart';
+import 'package:gp/trip/presentation/controller/trip_cubit.dart';
+import 'package:gp/trip/presentation/controller/trip_state.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
 import 'package:intl/intl.dart';
 import 'package:gp/user/presentation/screens/Register/CarInfo.dart';
 
 
+import '../../../../map/location.dart';
 import 'Verfication.dart';
 
 // const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
@@ -526,36 +529,46 @@ class SignUpPage extends StatelessWidget {
                       ),
 
                       // address
-                      const Padding(padding: EdgeInsets.all(10)),
-                      Container(
-                        width: 400,
-                        height: 85,
-                        padding: const EdgeInsets.all(20),
-                        child: TextFormField(
-                          controller: addressController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'address must not be empty';
-                            }
-                          },
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: 'Address',
-                            labelStyle: const TextStyle(
-                                color: Color(0xFF836D9A),
-                                fontWeight: FontWeight.w300,
-                                fontSize: 20),
-                            suffixIcon: IconButton(
-                              color: const Color(0xFF442268),
-                              // hoverColor: const Color(0xFFCF283C),
-                              iconSize: 30,
-                              onPressed: () {
-                                print('hello');
+
+                      BlocConsumer<TripCubit, TripStates>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        builder: (context, state) {
+                          return Container(
+
+                            padding: const EdgeInsets.all(20),
+                            child: TextFormField(
+                              controller: TripCubit.get(context).startAddressController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'address must not be empty';
+                                }
                               },
-                              icon: const Icon(Icons.add_location_alt),
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Address',
+                                labelStyle: const TextStyle(
+                                    color: Color(0xFF836D9A),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20),
+                                suffixIcon: IconButton(
+                                  color: const Color(0xFF442268),
+                                  // hoverColor: const Color(0xFFCF283C),
+                                  iconSize: 30,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LocationPage(backPage: SignUpPage(),)));
+                                  },
+                                  icon: const Icon(Icons.add_location_alt),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       ),
 
                       // phone number
@@ -703,33 +716,31 @@ class SignUpPage extends StatelessWidget {
                             if (formKey.currentState!.validate() &&
                                 (cubit.check_car) &&
                                 cubit.gender != null) {
-                              String user_age="0";
-                             var age=int.parse(ageController.text);
-                              if(age>=16&& age<25)
-                                {
-                                  user_age="Young";
-                                }
-                              else if(age>=25&& age<50)
-                                {
-                                  user_age='Middle';
-                                }
+                              String user_age = "0";
+                              var age = int.parse(ageController.text);
+                              if (age >= 16 && age < 25) {
+                                user_age = "Young";
+                              }
+                              else if (age >= 25 && age < 50) {
+                                user_age = 'Middle';
+                              }
                               else
-                                user_age="Old";
+                                user_age = "Old";
                               cubit.userPostModel = UserPostModel(
-                                  first_name: fnameController.text,
-                                  last_name: lnameController.text,
-                                  gender: cubit.gender! ,
-                                  age: user_age,
-                                  id_number: idController.text,
-                                  email: emailController.text,
-                                  country: CountryController.text,
-                                  city: CityController.text,
-                                  address: addressController.text ,
-                                  password: passwordController.text,
-                                  phone_number: phoneController.text,
-                                  have_car: cubit.have_car? "1":"0",
+                                first_name: fnameController.text,
+                                last_name: lnameController.text,
+                                gender: cubit.gender!,
+                                age: user_age,
+                                id_number: idController.text,
+                                email: emailController.text,
+                                country: CountryController.text,
+                                city: CityController.text,
+                                address: addressController.text,
+                                password: passwordController.text,
+                                phone_number: phoneController.text,
+                                have_car: cubit.have_car ? "1" : "0",
 
-                              personal_image: PersonalImage,
+                                personal_image: PersonalImage,
                                 card_image: CardImage,
                               );
                               print(cubit.userPostModel?.city);
@@ -745,8 +756,7 @@ class SignUpPage extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (
-                                            context) =>  verfication()));
+                                        builder: (context) => verfication()));
                               }
                             } else {
                               print("please enter gender");

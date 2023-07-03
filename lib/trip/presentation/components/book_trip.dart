@@ -9,11 +9,12 @@ import 'package:gp/trip/presentation/controller/trip_state.dart';
 import 'package:intl/intl.dart';
 
 import '../../../map/location.dart';
+import '../screens/Drivers/Home.dart';
 // for rebuild
 class BookTrip extends StatelessWidget {
    BookTrip({Key? key}) : super(key: key);
-  TextEditingController startAddressController = TextEditingController();
-  TextEditingController endAddressController = TextEditingController();
+  // TextEditingController startAddressController = TextEditingController();
+  // TextEditingController endAddressController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
    Future<void> _getCurrentLocation() async {
@@ -56,7 +57,7 @@ class BookTrip extends StatelessWidget {
                     height: 20.0,
                   ),
                   TextFormField(
-                    controller: startAddressController,
+                    controller: cubit.startAddressController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please enter start location";
@@ -76,7 +77,10 @@ class BookTrip extends StatelessWidget {
                         splashColor: const Color(0xFFCF283C),
                         iconSize: 30,
                         onPressed: () {
-                          _getCurrentLocation();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LocationPage(backPage: HomePage(),)));
                         },
                         icon: const Icon(Icons.location_on),
                       ),
@@ -86,7 +90,7 @@ class BookTrip extends StatelessWidget {
                     height: 20.0,
                   ),
                   TextFormField(
-                    controller: endAddressController,
+                    controller: cubit.endAddressController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please enter end location";
@@ -109,7 +113,7 @@ class BookTrip extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LocationPage()));
+                                  builder: (context) => LocationPage(backPage: HomePage(),)));
 
                           print('hello');
                         },

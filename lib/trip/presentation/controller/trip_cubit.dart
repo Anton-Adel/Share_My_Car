@@ -18,11 +18,17 @@ class TripCubit extends Cubit<TripStates> {
   TextEditingController startTimeController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
 
+  TextEditingController startAddressController = TextEditingController();
+  TextEditingController endAddressController = TextEditingController();
+
+
+
   UserModel? userModel;
   TripModel? tripModel;
   Failure ? error;
   void display_date_time(value, TextEditingController controller) {
     controller.text = value;
+    print(startAddressController.text);
     emit(TripDisplayDateTimeState());
   }
 

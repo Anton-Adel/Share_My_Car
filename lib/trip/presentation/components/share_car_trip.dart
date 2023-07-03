@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 import '../../../map/location.dart';
+import '../screens/Drivers/Home.dart';
 // for rebuild
 class ShareCarTrip extends StatelessWidget {
   ShareCarTrip({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class ShareCarTrip extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                TextFormField(
+                TextFormField(  //متنساش تجيب اللي في الكيوبت
                   controller: startAddressController,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -65,7 +66,10 @@ class ShareCarTrip extends StatelessWidget {
                       splashColor: const Color(0xFFCF283C),
                       iconSize: 30,
                       onPressed: () {
-                        _getCurrentLocation();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LocationPage(backPage: HomePage(),)));
                       },
                       icon: const Icon(Icons.location_on),
                     ),
@@ -98,7 +102,7 @@ class ShareCarTrip extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LocationPage()));
+                                builder: (context) => LocationPage(backPage: HomePage(),)));
 
                         print('hello');
                       },

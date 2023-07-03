@@ -58,245 +58,242 @@ class _HomePageState extends State<HomePage>
   double? _ratingValue;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-  create: (context) => TripCubit(),
-  child: BlocConsumer<TripCubit, TripStates>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(150),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: AppBar(
-              iconTheme: const IconThemeData(color: Color(0xFF442268)),
-              centerTitle: true,
-              title: const Text(
-                'Drivers',
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF442268)),
-              ),
-              actions: <Widget>[
-                // cancel Icon
-                IconButton(
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Color(0xFF442268),
-                    ),
-                    onPressed: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                              contentPadding: const EdgeInsets.all(20),
-                              actionsPadding:
-                                  const EdgeInsets.fromLTRB(0, 0, 65, 30),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              backgroundColor: const Color(0XFF2A1540),
-                              contentTextStyle: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                              title: const Text(
-                                'Cancel',
-                                style: TextStyle(
+  Widget build(BuildContext context) { //انا هنا شيلت ال كيوبت وخليته عام علشان هستخدمه في صفحه اللوكاشن
+    return BlocConsumer<TripCubit, TripStates>(
+    listener: (context, state) {
+      // TODO: implement listener
+    },
+    builder: (context, state) {
+      return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(150),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: AppBar(
+                iconTheme: const IconThemeData(color: Color(0xFF442268)),
+                centerTitle: true,
+                title: const Text(
+                  'Drivers',
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF442268)),
+                ),
+                actions: <Widget>[
+                  // cancel Icon
+                  IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Color(0xFF442268),
+                      ),
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                contentPadding: const EdgeInsets.all(20),
+                                actionsPadding:
+                                    const EdgeInsets.fromLTRB(0, 0, 65, 30),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                backgroundColor: const Color(0XFF2A1540),
+                                contentTextStyle: const TextStyle(
                                     color: Colors.white, fontSize: 20),
-                              ),
-                              content: const Text(
-                                  'You will cancel the trip and go to home. Are you sure?'),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Yes'),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: const Color(0XFFD4C9D6),
-                                      padding: EdgeInsets.all(11),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      textStyle: const TextStyle(
-                                        color: Color(0xFF442268),
-                                      )),
-                                  child: const Text('Yes',
+                                title: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                content: const Text(
+                                    'You will cancel the trip and go to home. Are you sure?'),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Yes'),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color(0XFFD4C9D6),
+                                        padding: EdgeInsets.all(11),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        textStyle: const TextStyle(
+                                          color: Color(0xFF442268),
+                                        )),
+                                    child: const Text('Yes',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Color(0xFF442268),
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () => Navigator.pop(context, 'No'),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color(0XFFD4C9D6),
+                                        padding: EdgeInsets.all(11),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        textStyle: const TextStyle(
+                                          color: Color(0xFF442268),
+                                        )),
+                                    child: const Text(
+                                      'No',
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Color(0xFF442268),
-                                      )),
-                                ),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () => Navigator.pop(context, 'No'),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: const Color(0XFFD4C9D6),
-                                      padding: EdgeInsets.all(11),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      textStyle: const TextStyle(
-                                        color: Color(0xFF442268),
-                                      )),
-                                  child: const Text(
-                                    'No',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xFF442268),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )))
-              ],
-              backgroundColor: const Color(0xFFFAFAFA),
-
-              // tab bar
-              flexibleSpace: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TabBar(
-                    labelColor: const Color(0xFF442268),
-                    labelStyle: const TextStyle(
-                        fontSize: 27.5, fontWeight: FontWeight.w400),
-                    unselectedLabelColor: Colors.grey,
-                    indicatorWeight: 3,
-                    indicatorColor: const Color(0xFF442268),
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorPadding: const EdgeInsets.all(0),
-                    isScrollable: true,
-                    physics: const BouncingScrollPhysics(),
-                    onTap: (int index) {
-                      print('Tab $index is tapped');
-                    },
-                    enableFeedback: true,
-                    // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
-                    // controller: _tabController,
-                    tabs: _tabs,
-                  ),
+                                ],
+                              )))
                 ],
+                backgroundColor: const Color(0xFFFAFAFA),
+
+                // tab bar
+                flexibleSpace: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TabBar(
+                      labelColor: const Color(0xFF442268),
+                      labelStyle: const TextStyle(
+                          fontSize: 27.5, fontWeight: FontWeight.w400),
+                      unselectedLabelColor: Colors.grey,
+                      indicatorWeight: 3,
+                      indicatorColor: const Color(0xFF442268),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorPadding: const EdgeInsets.all(0),
+                      isScrollable: true,
+                      physics: const BouncingScrollPhysics(),
+                      onTap: (int index) {
+                        print('Tab $index is tapped');
+                      },
+                      enableFeedback: true,
+                      // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
+                      // controller: _tabController,
+                      tabs: _tabs,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                  decoration: const BoxDecoration(
+          drawer: Drawer(
+            child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF442268),
+                    ),
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.account_circle_sharp,
+                              color: Colors.white,
+                              size: 80,
+                            )),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        // Padding(padding: EdgeInsets.all(25)),
+                        const Text(
+                          "Username@gmail.com",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        )
+                      ],
+                    )),
+                ListTile(
+                  leading: const Icon(
+                    Icons.notifications,
                     color: Color(0xFF442268),
                   ),
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.account_circle_sharp,
-                            color: Colors.white,
-                            size: 80,
-                          )),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      // Padding(padding: EdgeInsets.all(25)),
-                      const Text(
-                        "Username@gmail.com",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      )
-                    ],
-                  )),
-              ListTile(
-                leading: const Icon(
-                  Icons.notifications,
-                  color: Color(0xFF442268),
+                  title:
+                      const Text('Notification', style: TextStyle(fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NotificationsPage()));
+                  },
                 ),
-                title:
-                    const Text('Notification', style: TextStyle(fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NotificationsPage()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.person,
-                  color: Color(0xFF442268),
+                ListTile(
+                  leading: const Icon(
+                    Icons.person,
+                    color: Color(0xFF442268),
+                  ),
+                  title:
+                      const Text('Riders List', style: TextStyle(fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RidersListPage()));
+                  },
                 ),
-                title:
-                    const Text('Riders List', style: TextStyle(fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RidersListPage()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.car_repair_sharp,
-                  color: Color(0xFF442268),
+                ListTile(
+                  leading: const Icon(
+                    Icons.car_repair_sharp,
+                    color: Color(0xFF442268),
+                  ),
+                  title:
+                      const Text('Drivers List', style: TextStyle(fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DriversListPage()));
+                  },
                 ),
-                title:
-                    const Text('Drivers List', style: TextStyle(fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DriversListPage()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.settings,
-                  color: Color(0xFF442268),
+                ListTile(
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Color(0xFF442268),
+                  ),
+                  title: const Text('Setting', style: TextStyle(fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SettingPage()));
+                  },
                 ),
-                title: const Text('Setting', style: TextStyle(fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SettingPage()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.info,
-                  color: Color(0xFF442268),
+                ListTile(
+                  leading: const Icon(
+                    Icons.info,
+                    color: Color(0xFF442268),
+                  ),
+                  title: const Text('About Us', style: TextStyle(fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AboutUsPage()));
+                  },
                 ),
-                title: const Text('About Us', style: TextStyle(fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AboutUsPage()));
-                },
-              ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            physics: const BouncingScrollPhysics(),
+            // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
+            // controller: _tabController,
+            children: [
+              BookTrip(),
+              ShareCarTrip(),
+              const Center(child: Text('Content of Tab Three'))
             ],
           ),
         ),
-        body: TabBarView(
-          physics: const BouncingScrollPhysics(),
-          // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
-          // controller: _tabController,
-          children: [
-            BookTrip(),
-            ShareCarTrip(),
-            const Center(child: Text('Content of Tab Three'))
-          ],
-        ),
-      ),
-    );
-  },
-),
+      );
+    },
 );
   }
 

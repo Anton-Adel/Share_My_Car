@@ -1,8 +1,11 @@
+
 import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 void ShowToast(String message,ToastState state)
@@ -58,4 +61,32 @@ Future<File> get_image() async
     print(image);
   }
   return image!;
+}
+
+
+Future<LatLng> _getLatLngFromAddress(String address) async {
+  try {
+    List<Location> locations = await locationFromAddress(address);
+
+    if (locations.isNotEmpty) {
+      Location location = locations.first;
+      LatLng latLng = LatLng(location.latitude, location.longitude);
+
+      // Create a new Marker object and add it to the _markers set
+      // setState(() {
+      //   _markers.add(
+      //     Marker(
+      //       markerId: MarkerId('destination'),
+      //       position: latLng,
+      //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      //       infoWindow: InfoWindow(title: address),
+      //     ),
+      //   );
+      // });
+      return latLng;
+    }
+  } catch (e) {
+    print(e);
+  }
+  return LatLng(0, 0);
 }

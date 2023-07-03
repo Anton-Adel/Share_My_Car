@@ -2,13 +2,18 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:gp/trip/presentation/controller/trip_cubit.dart';
+import 'package:gp/trip/presentation/controller/trip_state.dart';
+import 'package:gp/trip/presentation/screens/Drivers/Home.dart';
 import 'package:location/location.dart'as loc;
-
+import '../home/home.dart';
 class LocationPage extends StatefulWidget {
-  const LocationPage({Key? key}) : super(key: key);
+  Widget? backPage;
+   LocationPage({Key? key,required this.backPage}) : super(key: key);
 
   @override
   _LocationPageState createState() => _LocationPageState();
@@ -17,10 +22,9 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng destLocation = LatLng(30.0566104, 31.3301076);
+  static const LatLng destLocation = LatLng(0, 0);
   bool _isSheetOpen = false;
-  TextEditingController _startAddressController = TextEditingController();
-  TextEditingController _endAddressController = TextEditingController();
+
 
   List<LatLng> _polylineCoordinates = [];
   loc.LocationData? _currentLocation;
@@ -57,6 +61,9 @@ class _LocationPageState extends State<LocationPage> {
     _getPolylinePoints();
     super.initState();
   }
+  // void setMyVariable(String x, String y) {
+  //   _homePageKey.currentState?.settmyVariable(x, y);
+  // }
   Future<String> _getAddressFromLatLng(LatLng latLng) async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
@@ -66,35 +73,36 @@ class _LocationPageState extends State<LocationPage> {
 
       if (placemarks.isNotEmpty) {
         Placemark placemark = placemarks.first;
-        String address = placemark.street ?? '';
+        String add = placemark.street ?? '';
         if (placemark.subThoroughfare != null) {
-          address = '${placemark.subThoroughfare} $address';
+          add = '${placemark.subThoroughfare} $add';
         }
         if (placemark.thoroughfare != null) {
-          address = '${placemark.thoroughfare}, $address';
+          add = '${placemark.thoroughfare}, $add';
         }
         if (placemark.subLocality != null) {
-          address = '$address, ${placemark.subLocality}';
+          add = '$add, ${placemark.subLocality}';
         }
         if (placemark.locality != null) {
-          address = '$address, ${placemark.locality}';
+          add = '$add, ${placemark.locality}';
         }
         if (placemark.administrativeArea != null) {
-          address = '$address, ${placemark.administrativeArea}';
+          add = '$add, ${placemark.administrativeArea}';
         }
         if (placemark.postalCode != null) {
-          address = '$address ${placemark.postalCode}';
+          add = '$add ${placemark.postalCode}';
         }
         if (placemark.country != null) {
-          address = '$address, ${placemark.country}';
+          add = '$add, ${placemark.country}';
         }
-        return address;
+        return add;
       }
     } catch (e) {
       print(e);
     }
     return '';
   }
+
   Future<LatLng> _getLatLngFromAddress(String address) async {
     try {
       List<Location> locations = await locationFromAddress(address);
@@ -103,7 +111,7 @@ class _LocationPageState extends State<LocationPage> {
         Location location = locations.first;
         LatLng latLng = LatLng(location.latitude, location.longitude);
 
-        // Create a new Marker object and add it to the _markers set
+        //Create a new Marker object and add it to the _markers set
         setState(() {
           _markers.add(
             Marker(
@@ -121,10 +129,17 @@ class _LocationPageState extends State<LocationPage> {
     }
     return LatLng(0, 0);
   }
-  void _openLocationSheet() {
+  void _openLocationSheet() async {
     setState(() {
       _isSheetOpen = true;
     });
+    loc.LocationData currentLocation =
+    await loc.Location().getLocation();
+    LatLng currentLatLng = LatLng(
+        currentLocation.latitude!, currentLocation.longitude!);
+    String currentAddress =
+    await _getAddressFromLatLng(currentLatLng);
+    // ignore: use_build_context_synchronously
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -138,34 +153,90 @@ class _LocationPageState extends State<LocationPage> {
               SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  controller: _startAddressController,
+                child: TextFormField(
+                  controller: TripCubit.get(context).startAddressController,
                   decoration: InputDecoration(
-                    labelText: 'Start Address',
+                    labelText: 'Enter Address',
                     labelStyle: TextStyle(
-                        color: Color(0xFF836D9A),
-                        fontWeight: FontWeight.w300,
-                        fontSize: 20),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.my_location),
-                      onPressed: () async {
-                        _currentLocation = await loc.Location().getLocation();
-                        LatLng latLng = LatLng(
-                            _currentLocation!.latitude!,
-                            _currentLocation!.longitude!);
-                        String address =
-                        await _getAddressFromLatLng(latLng);
-                        _startAddressController.text = address;
-                      },
+                      color: Color(0xFF836D9A),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 20,
+                    ),
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.my_location),
+                          onPressed: () async {
+                            loc.LocationData currentLocation =
+                            await loc.Location().getLocation();
+                            LatLng currentLatLng = LatLng(
+                                currentLocation.latitude!,
+                                currentLocation.longitude!);
+                            String currentAddress =
+                            await _getAddressFromLatLng(currentLatLng);
+                           // TripCubit.get(context).startAddressController.text = currentAddress;
+                            TripCubit.get(context).display_date_time(currentAddress, TripCubit.get(context).startAddressController);
+                            setState(() {
+                              _markers.add(
+                                Marker(
+                                  markerId: MarkerId('current_location'),
+                                  position: currentLatLng,
+                                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                                      BitmapDescriptor.hueRed),
+                                  infoWindow: InfoWindow(
+                                    title: 'Current Location',
+                                    snippet: currentAddress,
+                                  ),
+                                ),
+                              );
+                            });
+                          },
+                        ),
+
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () async {
+                            String address = TripCubit.get(context).startAddressController.text.trim();
+                            TripCubit.get(context).display_date_time(address, TripCubit.get(context).startAddressController);
+
+                            if (address.isNotEmpty) {
+                              LatLng location =
+                              await _getLatLngFromAddress(address);
+                              setState(() {
+                                _markers.add(
+                                  Marker(
+                                    markerId: MarkerId('start_location'),
+                                    position: location,
+                                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                                      BitmapDescriptor.hueGreen,
+                                    ),
+                                    infoWindow: InfoWindow(
+                                      title: 'Start Location',
+                                      snippet: address,
+                                    ),
+                                  ),
+                                );
+                              });
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _markers.removeWhere(
+                              (marker) => marker.markerId.value == 'current_location');
+                    });
+                  },
                 ),
               ),
               SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
-                  controller: _endAddressController,
+                  controller: TripCubit.get(context).endAddressController,
                   decoration: InputDecoration(
                     labelText: 'Destination Address',
                     labelStyle: TextStyle(
@@ -176,7 +247,9 @@ class _LocationPageState extends State<LocationPage> {
                       icon: Icon(Icons.search),
                       onPressed: () async {
                         String address =
-                        _endAddressController.text.trim();
+                        TripCubit.get(context).endAddressController.text.trim();
+                        TripCubit.get(context).display_date_time(address, TripCubit.get(context).endAddressController);
+
                         if (address.isNotEmpty) {
                           LatLng destinationLatLng =
                           await _getLatLngFromAddress(address);
@@ -189,8 +262,9 @@ class _LocationPageState extends State<LocationPage> {
                       },
                     ),
                   ),
-                  onSubmitted: (value) async{
-                    LatLng destinationLatLng = await _getLatLngFromAddress(value);
+                  onSubmitted: (value) async {
+                    LatLng destinationLatLng =
+                    await _getLatLngFromAddress(value);
 
                     setState(() {
                       _getPolylinePoints();
@@ -200,13 +274,24 @@ class _LocationPageState extends State<LocationPage> {
                 ),
               ),
               SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  widget.backPage!));
+                  // String S=_startAddressController.text;
+                  // String d=_endAddressController.text;
+
+                },
+                child: Text('ok'),
+              ),
             ],
           ),
         );
       },
     );
   }
-
   Set<Marker> _markers = {};
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
@@ -227,6 +312,11 @@ class _LocationPageState extends State<LocationPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<TripCubit, TripStates>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Location Page'),
@@ -253,12 +343,21 @@ class _LocationPageState extends State<LocationPage> {
           ),
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _openLocationSheet,
-        tooltip: 'Get Location',
-        child: Icon(Icons.add_location),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 25.0),
+          child: FloatingActionButton(
+
+            onPressed: _openLocationSheet,
+            tooltip: 'Get Location',
+            child: Icon(Icons.add_location),
+          ),
+        ),
       ),
     );
+  },
+);
   }
 }
 

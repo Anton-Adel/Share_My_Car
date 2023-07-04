@@ -50,317 +50,320 @@ class ShareCarTrip extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField( //متنساش تجيب اللي في الكيوبت
-                      controller: cubit.startAddressShareCarController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter start location";
-                        } else
-                          return null;
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter your start address',
-                        labelStyle: TextStyle(
-                          color: Color(0xFF836D9A),
-                          fontWeight: FontWeight.w300,
-                          fontSize: 20,
-                        ),
-                        suffixIcon: IconButton(
-                          color: Colors.red,
-                          splashColor: const Color(0xFFCF283C),
-                          iconSize: 30,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        LocationPage(backPage: HomePage(),)));
-                          },
-                          icon: const Icon(Icons.location_on),
-                        ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      controller: cubit.endAddressShareCarController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter end location";
-                        } else
-                          return null;
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter your end address',
-                        labelStyle: TextStyle(
-                          color: Color(0xFF836D9A),
-                          fontWeight: FontWeight.w300,
-                          fontSize: 20,
-                        ),
-                        suffixIcon: IconButton(
-                          color: const Color(0xFF442268),
-                          splashColor: const Color(0xFFCF283C),
-                          iconSize: 30,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        LocationPage(backPage: HomePage(),)));
-
-                            print('hello');
-                          },
-                          icon: const Icon(Icons.location_on),
-                        ),
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: cubit.startDateShareCarController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Start date must not be empty';
-                        }
-                      },
-                      decoration: const InputDecoration(
+                      TextFormField( //متنساش تجيب اللي في الكيوبت
+                        controller: cubit.startAddressShareCarController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter start location";
+                          } else
+                            return null;
+                        },
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Trip date',
+                          labelText: 'Enter your start address',
                           labelStyle: TextStyle(
-                              color: Color(0xFF836D9A),
-                              fontWeight: FontWeight.w300,
-                              fontSize: 20),
-                          suffixIcon: Icon(
-                            Icons.calendar_today,
-                            color: Color(0xFF442268),
-                            size: 30,
-                          )),
-                      readOnly: true,
-                      //set it true, so that user will not able to edit text
+                            color: Color(0xFF836D9A),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 20,
+                          ),
+                          suffixIcon: IconButton(
+                            color: Colors.red,
+                            splashColor: const Color(0xFFCF283C),
+                            iconSize: 30,
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LocationPage(backPage: HomePage(),)));
+                            },
+                            icon: const Icon(Icons.location_on),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        controller: cubit.endAddressShareCarController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter end location";
+                          } else
+                            return null;
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter your end address',
+                          labelStyle: TextStyle(
+                            color: Color(0xFF836D9A),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 20,
+                          ),
+                          suffixIcon: IconButton(
+                            color: const Color(0xFF442268),
+                            splashColor: const Color(0xFFCF283C),
+                            iconSize: 30,
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LocationPage(backPage: HomePage(),)));
 
-                      //datePicker
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
+                              print('hello');
+                            },
+                            icon: const Icon(Icons.location_on),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: cubit.startDateShareCarController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Start date must not be empty';
+                          }
+                        },
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Trip date',
+                            labelStyle: TextStyle(
+                                color: Color(0xFF836D9A),
+                                fontWeight: FontWeight.w300,
+                                fontSize: 20),
+                            suffixIcon: Icon(
+                              Icons.calendar_today,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            )),
+                        readOnly: true,
+                        //set it true, so that user will not able to edit text
+
+                        //datePicker
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1950),
+                              //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime.now());
+                          if (pickedDate != null) {
+                            print(
+                                pickedDate); //pickedDate output format => 2021-03-10
+                            String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            print(formattedDate);
+                            // setState(() {
+                            //   startDateController.text = formattedDate;
+                            // });
+                            // print(DateTime.now()-pickedDate);//formatted date output using intl package =>  2021-03-16
+                            // setState(() {
+                            //   dateInput.text =
+                            //       formattedDate; //set output date to TextFormField value.
+                            // });
+                            cubit.display_date_time(formattedDate,cubit.startDateShareCarController);
+
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: cubit.startTimeShareCarController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Start time must not be empty';
+                          }
+                        },
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Trip time',
+                            labelStyle: TextStyle(
+                                color: Color(0xFF836D9A),
+                                fontWeight: FontWeight.w300,
+                                fontSize: 20),
+                            suffixIcon: Icon(
+                              Icons.watch_later_outlined,
+                              color: Color(0xFF442268),
+                              size: 30,
+                            )),
+                        readOnly: true,
+                        //set it true, so that user will not able to edit text
+
+                        //datePicker
+                        onTap: () async {
+                          TimeOfDay? pickedTime = await showTimePicker(
                             context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime.now());
-                        if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10
-                          String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(formattedDate);
-                          // setState(() {
-                          //   startDateController.text = formattedDate;
-                          // });
-                          // print(DateTime.now()-pickedDate);//formatted date output using intl package =>  2021-03-16
-                          // setState(() {
-                          //   dateInput.text =
-                          //       formattedDate; //set output date to TextFormField value.
-                          // });
-                          cubit.display_date_time(formattedDate,cubit.startDateShareCarController);
+                            initialTime: TimeOfDay.now(),
+                          );
 
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: cubit.startTimeShareCarController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Start time must not be empty';
-                        }
-                      },
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Trip time',
-                          labelStyle: TextStyle(
-                              color: Color(0xFF836D9A),
-                              fontWeight: FontWeight.w300,
-                              fontSize: 20),
-                          suffixIcon: Icon(
-                            Icons.watch_later_outlined,
-                            color: Color(0xFF442268),
-                            size: 30,
-                          )),
-                      readOnly: true,
-                      //set it true, so that user will not able to edit text
+                          if (pickedTime != null) {
+                            print(
+                                pickedTime); //pickedDate output format => 2021-03-10
+                            String formattedTime = pickedTime.format(context);
 
-                      //datePicker
-                      onTap: () async {
-                        TimeOfDay? pickedTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay.now(),
-                        );
-
-                        if (pickedTime != null) {
-                          print(
-                              pickedTime); //pickedDate output format => 2021-03-10
-                          String formattedTime = pickedTime.format(context);
-
-                          print(formattedTime);
-                          // setState(() {
-                          //   startTimeController.text = formattedTime;
-                          // });
-                          // print(DateTime.now()-pickedDate);//formatted date output using intl package =>  2021-03-16
-                          // setState(() {
-                          //   dateInput.text =
-                          //       formattedDate; //set output date to TextFormField value.
-                          // });
-                           cubit.display_date_time(formattedTime,cubit.startTimeShareCarController);
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0),
-                            child: InkWell(
-
-                              onTap: (){
-                                cubit.set_seats(1, cubit.c1);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 40,
-
-                                child: Center(child: Text("1", style: TextStyle(
-                                    color: Colors.black, fontSize: 35),)),
-                                decoration: BoxDecoration(
-                                  color: cubit.c1,
-                                    border: Border.all(
-                                        color: Color(0xFF442268), width: 2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0),
-                            child: InkWell(
-                              onTap: (){
-                                cubit.set_seats(2, cubit.c2);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 40,
-
-                                child: Center(child: Text("2", style: TextStyle(
-                                    color: Colors.black, fontSize: 35),)),
-                                decoration: BoxDecoration(
-                                    color: cubit.c2,
-                                    border: Border.all(
-                                        color: Color(0xFF442268), width: 2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0),
-                            child: InkWell(
-                              onTap: (){
-                                cubit.set_seats(3, cubit.c3);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 40,
-
-                                child: Center(child: Text("3", style: TextStyle(
-                                    color: Colors.black, fontSize: 35),)),
-                                decoration: BoxDecoration(
-                                    color: cubit.c3,
-                                    border: Border.all(
-                                        color: Color(0xFF442268), width: 2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0),
-                            child: InkWell(
-                              onTap: (){
-                                cubit.set_seats(4, cubit.c4);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                height: 40,
-
-                                child: Center(child: Text("4", style: TextStyle(
-                                    color: Colors.black, fontSize: 35),)),
-                                decoration: BoxDecoration(
-                                    color: cubit.c4,
-                                    border: Border.all(
-                                        color: Color(0xFF442268), width: 2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    ElevatedButton(
-                      child: const Text('Next'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF442268),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            print(formattedTime);
+                            // setState(() {
+                            //   startTimeController.text = formattedTime;
+                            // });
+                            // print(DateTime.now()-pickedDate);//formatted date output using intl package =>  2021-03-16
+                            // setState(() {
+                            //   dateInput.text =
+                            //       formattedDate; //set output date to TextFormField value.
+                            // });
+                             cubit.display_date_time(formattedTime,cubit.startTimeShareCarController);
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          cubit.postBookTrip(start_address: cubit
-                              .startAddressShareCarController.text,
-                              end_address: cubit.endAddressShareCarController.text,
-                              start_time: cubit.startTimeShareCarController.text,
-                              start_date: cubit.startDateShareCarController.text);
-                        }
-                      },
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: InkWell(
+
+                                onTap: (){
+                                  cubit.set_seats(1, cubit.c1);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  height: 40,
+
+                                  child: Center(child: Text("1", style: TextStyle(
+                                      color: Colors.black, fontSize: 35),)),
+                                  decoration: BoxDecoration(
+                                    color: cubit.c1,
+                                      border: Border.all(
+                                          color: Color(0xFF442268), width: 2),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: InkWell(
+                                onTap: (){
+                                  cubit.set_seats(2, cubit.c2);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  height: 40,
+
+                                  child: Center(child: Text("2", style: TextStyle(
+                                      color: Colors.black, fontSize: 35),)),
+                                  decoration: BoxDecoration(
+                                      color: cubit.c2,
+                                      border: Border.all(
+                                          color: Color(0xFF442268), width: 2),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: InkWell(
+                                onTap: (){
+                                  cubit.set_seats(3, cubit.c3);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  height: 40,
+
+                                  child: Center(child: Text("3", style: TextStyle(
+                                      color: Colors.black, fontSize: 35),)),
+                                  decoration: BoxDecoration(
+                                      color: cubit.c3,
+                                      border: Border.all(
+                                          color: Color(0xFF442268), width: 2),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: InkWell(
+                                onTap: (){
+                                  cubit.set_seats(4, cubit.c4);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  height: 40,
+
+                                  child: Center(child: Text("4", style: TextStyle(
+                                      color: Colors.black, fontSize: 35),)),
+                                  decoration: BoxDecoration(
+                                      color: cubit.c4,
+                                      border: Border.all(
+                                          color: Color(0xFF442268), width: 2),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      ElevatedButton(
+                        child: const Text('Next'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xFF442268),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 15),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            cubit.postBookTrip(start_address: cubit
+                                .startAddressShareCarController.text,
+                                end_address: cubit.endAddressShareCarController.text,
+                                start_time: cubit.startTimeShareCarController.text,
+                                start_date: cubit.startDateShareCarController.text);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

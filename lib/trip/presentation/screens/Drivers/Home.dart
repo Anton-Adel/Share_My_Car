@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gp/Notifications/NotificationsPage.dart';
+import 'package:gp/trip/presentation/components/my_trips.dart';
 import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 import 'package:gp/user/presentation/controller/login/login_cubit.dart';
 import 'package:intl/intl.dart';
@@ -68,6 +69,7 @@ class _HomePageState extends State<HomePage>
     builder: (context, state) {
       var cubit= TripCubit.get(context);
       return DefaultTabController(
+        initialIndex: cubit.initial_index_of_tap!,
         length: 3,
         child: Scaffold(
           appBar: PreferredSize(
@@ -173,11 +175,7 @@ class _HomePageState extends State<HomePage>
                       onTap: (int index) {
 
                         print('Tab $index is tapped');
-                        if(index==1)
-                          {
-                            cubit.startAddressController.clear();
-                            cubit.endAddressController.clear();
-                          }
+
                       },
                       enableFeedback: true,
                       // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
@@ -296,13 +294,14 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           body: TabBarView(
+
             physics: const BouncingScrollPhysics(),
             // Uncomment the line below and remove DefaultTabController if you want to use a custom TabController
             // controller: _tabController,
             children: [
               BookTrip(),
               ShareCarTrip(),
-              const Center(child: Text('Content of Tab Three'))
+               MyTrips()
             ],
           ),
         ),

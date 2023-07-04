@@ -128,7 +128,7 @@ class UserRemoteDataSource extends BaseUserRemoteDataSource {
   getRequest(String uri) async {
     var response = await http.get(Uri.parse(uri), headers: {
       "Accept": "application/json",
-      "Authorization":Token!
+      "Authorization":Token
 
     });
     if (response.statusCode == 200) {
@@ -151,7 +151,7 @@ class UserRemoteDataSource extends BaseUserRemoteDataSource {
     request.headers.addAll({
       "Accept": "application/json",
       "Authorization":
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDNhYTU2MWIyZDE2YTJmMmM3MjI4MTZlZjc3NGRmMWU0ZThkMjM2YmIyNGJjM2UyNmNkNzk5NDllMGI0YmY1NDIxZWU3OWIzZTU5NzZiMWMiLCJpYXQiOjE2ODc2MTU5NTAuMjIxOTYxLCJuYmYiOjE2ODc2MTU5NTAuMjIxOTY0LCJleHAiOjE3MTkyMzgzNTAuMjAxNTE3LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.g7ApEy3hmp_aEp11DhPKzX231ARKXxMMJwLqHYmCmj7JVKT9wjNhvZFtIfNQR_T5DDr81rKLAb20Jqkc2ejRAzwPS3hEUBEzoo-13jg-4OnNycNNDiYDGEIqyGgWduVYvDPrqRMtOBNQ2pn0tFFnxs5mobNAcgG3YRiHszqRjqL5t7ftgUyQX_Xbcl_rwDmhUbg6bDdl8Aj0iivV5CtV88SzAFaWYBPJKGfo7VcC1xDlbqI2uwOx7fQ53QNWanU1ZY8XJ2R4_vmvT5HR7zrU_WpaWyOXkvTFY9_ZKP4PqZZiqRRD3b6MNXA6F07mouxK71uoRi7fZ3MFmdPb3rKNl3_3wke6eOMaKq8Rnb0E3BBxXcTtsskgx2fK2m5Ip5pnaY0uIb8Lhp1yN2hVgmepLSVeeZPPishojRa2xOfQ_yxIJXDJdbSQS3oOgxwVEA9PDYL2E66f65xvx4kt8oY8Ax_ht7WUuUToRglgMpw6w2afze5ljqJw_YTyN6M01X9C0on5Cmlk43tCRtQQB5W9LcyPbVwfb9Ifc9-C6and7QNopKNIihg6KdRNPlLs2sXCabz4HggByIZPtaNKJErARjI4IJugtPu_kNxvHJHyxfocffjTI_ylwjuiTFVB7bwqF5Bd7_BsgCigmvp5RNb-ZHIC8niA6_j_Sf_ejIoSWJE"
+      Token
     });
     // personal image
     if(personal_image!=null) {

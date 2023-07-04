@@ -23,3 +23,6 @@ class TripClearState extends TripStates{}
 class TripGetAllTripsLoadingState extends TripStates{}
 class TripGetAllTripsSuccessState extends TripStates{}
 class TripGetAllTripsErrorState extends TripStates{}
+
+
+class TripToLocationState extends TripStates{}

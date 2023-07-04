@@ -32,22 +32,39 @@ class TripCubit extends Cubit<TripStates> {
 
   TextEditingController startAddressController = TextEditingController();
   TextEditingController endAddressController = TextEditingController();
+
+  //share car
   TextEditingController startAddressShareCarController =
       TextEditingController();
   TextEditingController endAddressShareCarController = TextEditingController();
-
-  void clear_addresses() {
-    startAddressShareCarController.clear();
-    endAddressShareCarController.clear();
-    emit(TripClearState());
-  }
-
-
 
   UserModel? userModel;
   TripModel? tripModel;
   Failure? error;
   int? seats = 0;
+
+  int? to_location;
+
+  int? from_register;
+
+  int? initial_index_of_tap = 0;
+
+  void FromRegister(value) {
+    from_register = value;
+    to_location = 0;
+    emit(TripToLocationState());
+  }
+
+  void ToLocation(value) {
+    from_register = 0;
+    to_location = value;
+    if (value == 0) {
+      initial_index_of_tap = 0;
+    } else {
+      initial_index_of_tap = 1;
+    }
+    emit(TripToLocationState());
+  }
 
   Color c1 = Colors.white,
       c2 = Colors.white,
@@ -56,12 +73,12 @@ class TripCubit extends Cubit<TripStates> {
 
   void display_date_time(value, TextEditingController controller) {
     controller.text = value;
-    if (startAddressController.text != null) {
-      startAddressShareCarController.text = startAddressController.text;
-    }
-    if (endAddressController.text != null) {
-      endAddressShareCarController.text = endAddressController.text;
-    }
+    // if (startAddressController.text != null) {
+    //   startAddressShareCarController.text = startAddressController.text;
+    // }
+    // if (endAddressController.text != null) {
+    //   endAddressShareCarController.text = endAddressController.text;
+    // }
     emit(TripDisplayDateTimeState());
   }
 
@@ -186,9 +203,20 @@ class TripCubit extends Cubit<TripStates> {
               element.user_cluster == userModel!.cluster_number &&
               element.start_date == tripModel!.start_date &&
               element.end_location == tripModel!.end_location) {
-            // هنا هنعمل جيل لكل يوزر ونحطه في ليست
-            tripList.add(element);
-          }
+          // هنا هنعمل جيل لكل يوزر ونحطه في ليس
+          List<String> element_time = element.start_time.split(" ");
+          List<String> user_time = tripModel!.start_time.split(" ");
+          element_time = element_time[0].split(":");
+          user_time = user_time[0].split(":");
+          int sub=int.parse(element_time[0]) * 60 +
+              int.parse(element_time[1]) -
+              (int.parse(user_time[0]) * 60 + int.parse(user_time[1]));
+          if(sub>=-20&&sub<=20)
+            {
+
+            }
+
+           }
         });
         emit(TripGetAllTripsSuccessState());
       });

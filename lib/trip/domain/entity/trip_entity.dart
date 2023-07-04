@@ -16,7 +16,7 @@ class TripEntity extends Equatable {
   final int user_id;
   final String user_cluster;
   final String start_date;
-  String? shared_seats;
+  int? shared_seats;
 
 
    TripEntity({

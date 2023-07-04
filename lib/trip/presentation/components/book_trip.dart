@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:gp/core/shared_components/shared.dart';
 import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 import 'package:gp/trip/presentation/controller/trip_state.dart';
+import 'package:gp/trip/presentation/screens/Drivers/ProfilePage.dart';
 import 'package:intl/intl.dart';
 
 import '../../../map/location.dart';
@@ -82,6 +83,8 @@ class BookTrip extends StatelessWidget {
                             splashColor: const Color(0xFFCF283C),
                             iconSize: 30,
                             onPressed: () {
+                              print("hiiii");
+                              cubit.ToLocation(0);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -116,6 +119,7 @@ class BookTrip extends StatelessWidget {
                             splashColor: const Color(0xFFCF283C),
                             iconSize: 30,
                             onPressed: () {
+                              cubit.ToLocation(0);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -246,6 +250,7 @@ class BookTrip extends StatelessWidget {
                                 start_date: cubit.startDateController.text);
                           }
                           ShowToast("Search for appropriate drivers", ToastState.Success);
+                          cubit.getAllUsers();
                           // cubit.eslam();
                         },
                       ),
@@ -260,128 +265,158 @@ class BookTrip extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) =>
-                      Card(
-                        elevation: 10,
-                        child: Container(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                          margin: const EdgeInsets.all(8),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
+                        },
+                        child: Card(
+                          elevation: 10,
+                          child: Container(
+                            padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                            margin: const EdgeInsets.all(8),
 
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF1F1F1),
-                            border: Border.all(color: Colors.black12, width: 2),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const CircleAvatar(
-                                    radius: 40,
-                                    backgroundColor: Color(0xFF442268),
-                                    child: CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                          'assets/Anton.jpeg'),
-                                      radius: 43.5,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF1F1F1),
+                              border: Border.all(color: Colors.black12, width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Color(0xFF442268),
+                                      child: CircleAvatar(
+                                        backgroundImage: AssetImage(
+                                            'assets/Anton.jpeg'),
+                                        radius: 43.5,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10,),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+
+                                        children: [
+                                          Row(
+                                            children: const [
+                                              Text("Name:", style: TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w400),),
+                                              Expanded(child: Text(
+                                                "Eslam Khaled Eid",
+                                                style: TextStyle(fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .w400),)),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Text("Phone number:",
+                                                style: TextStyle(fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .w400),),
+                                              //SizedBox(width: 10,),
+                                              Expanded(child: Text("01064643135",
+                                                style: TextStyle(fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .w400),)),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Text("Car:", style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400),),
+                                              Expanded(child: Text(
+                                                "Grey | Peugeot 3008",
+                                                style: TextStyle(fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .w400),)),
+                                            ],
+                                          ),
+                                          // Row(
+                                          //   children: const [
+                                          //     Text("Distance:", style: TextStyle(
+                                          //         fontSize: 18,
+                                          //         fontWeight: FontWeight.w400),),
+                                          //     Text("1Km", style: TextStyle(
+                                          //         fontSize: 18,
+                                          //         fontWeight: FontWeight.w400),),
+                                          //     SizedBox(
+                                          //       width: 15,
+                                          //     ),
+                                          //     Text("Time:", style: TextStyle(
+                                          //         fontSize: 18,
+                                          //         fontWeight: FontWeight.w400),),
+                                          //     Expanded(child: Text("10min",
+                                          //       style: TextStyle(fontSize: 18,
+                                          //           fontWeight: FontWeight
+                                          //               .w400),)),
+                                          //   ],
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 15),
+                                // implement the rating bar
+                                // Padding(
+                                //   padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                                //   child: RatingBar(
+                                //       initialRating: 0,
+                                //       direction: Axis.horizontal,
+                                //       allowHalfRating: true,
+                                //       itemCount: 5,
+                                //       itemSize: 30,
+                                //       ratingWidget: RatingWidget(
+                                //           full: const Icon(Icons.star,
+                                //               color: Colors.orange),
+                                //           half: const Icon(
+                                //             Icons.star_half,
+                                //             color: Colors.orange,
+                                //           ),
+                                //           empty: const Icon(
+                                //             Icons.star_outline,
+                                //             color: Colors.orange,
+                                //           )),
+                                //       onRatingUpdate: (value) {
+                                //         // setState(() {
+                                //         //   _ratingValue = value;
+                                //         // });
+                                //       }),
+                                // ),
+                                ElevatedButton(
+                                  child: const Text('Take car'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xFF442268),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 80, vertical: 15),
+                                    textStyle: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(width: 10,),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
+                                  onPressed: () {
+                                    // if (formKey.currentState!.validate()) {
+                                    //   cubit.postBookTrip(
+                                    //       start_address: cubit.startAddressController.text,
+                                    //       end_address: cubit.endAddressController.text,
+                                    //       start_time: cubit.startTimeController.text,
+                                    //       start_date: cubit.startDateController.text);
+                                    // }
+                                    ShowToast("Take Car Confirmed", ToastState.TakeCar);
+                                    // cubit.eslam();
+                                  },
+                                ),
+                                const SizedBox(height: 15),
 
-                                      children: [
-                                        Row(
-                                          children: const [
-                                            Text("Name:", style: TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.w400),),
-                                            Expanded(child: Text(
-                                              "Eslam Khaled Eid",
-                                              style: TextStyle(fontSize: 18,
-                                                  fontWeight: FontWeight
-                                                      .w400),)),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Text("Phone number:",
-                                              style: TextStyle(fontSize: 18,
-                                                  fontWeight: FontWeight
-                                                      .w400),),
-                                            //SizedBox(width: 10,),
-                                            Expanded(child: Text("01064643135",
-                                              style: TextStyle(fontSize: 18,
-                                                  fontWeight: FontWeight
-                                                      .w400),)),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Text("Car:", style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w400),),
-                                            Expanded(child: Text(
-                                              "Grey | Peugeot 3008",
-                                              style: TextStyle(fontSize: 18,
-                                                  fontWeight: FontWeight
-                                                      .w400),)),
-                                          ],
-                                        ),
-                                        // Row(
-                                        //   children: const [
-                                        //     Text("Distance:", style: TextStyle(
-                                        //         fontSize: 18,
-                                        //         fontWeight: FontWeight.w400),),
-                                        //     Text("1Km", style: TextStyle(
-                                        //         fontSize: 18,
-                                        //         fontWeight: FontWeight.w400),),
-                                        //     SizedBox(
-                                        //       width: 15,
-                                        //     ),
-                                        //     Text("Time:", style: TextStyle(
-                                        //         fontSize: 18,
-                                        //         fontWeight: FontWeight.w400),),
-                                        //     Expanded(child: Text("10min",
-                                        //       style: TextStyle(fontSize: 18,
-                                        //           fontWeight: FontWeight
-                                        //               .w400),)),
-                                        //   ],
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 15),
-                              // implement the rating bar
-                              // Padding(
-                              //   padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-                              //   child: RatingBar(
-                              //       initialRating: 0,
-                              //       direction: Axis.horizontal,
-                              //       allowHalfRating: true,
-                              //       itemCount: 5,
-                              //       itemSize: 30,
-                              //       ratingWidget: RatingWidget(
-                              //           full: const Icon(Icons.star,
-                              //               color: Colors.orange),
-                              //           half: const Icon(
-                              //             Icons.star_half,
-                              //             color: Colors.orange,
-                              //           ),
-                              //           empty: const Icon(
-                              //             Icons.star_outline,
-                              //             color: Colors.orange,
-                              //           )),
-                              //       onRatingUpdate: (value) {
-                              //         // setState(() {
-                              //         //   _ratingValue = value;
-                              //         // });
-                              //       }),
-                              // ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -389,7 +424,7 @@ class BookTrip extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                  itemCount: 1)
+                  itemCount: 0)
             ],
           ),
         );

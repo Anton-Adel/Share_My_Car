@@ -550,6 +550,7 @@ class SignUpPage extends StatelessWidget {
                                   // hoverColor: const Color(0xFFCF283C),
                                   iconSize: 30,
                                   onPressed: () {
+                                    TripCubit.get(context).FromRegister(1);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

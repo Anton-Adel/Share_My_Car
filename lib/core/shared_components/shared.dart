@@ -31,7 +31,7 @@ void ShowToast(String message,ToastState state)
 }
 
 
-enum ToastState{Error,Success}
+enum ToastState{Error,Success,TakeCar}
 
 Color ToastColor (ToastState state)
 {
@@ -44,6 +44,10 @@ Color ToastColor (ToastState state)
 
     case ToastState.Success:
       c=const Color(0xFF442268);
+      break;
+
+    case ToastState.TakeCar :
+      c= Colors.black;
       break;
   }
   return c;

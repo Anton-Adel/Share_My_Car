@@ -41,6 +41,7 @@ class TripRepository extends BaseTripRepository {
       print(response["result"]);
 
       response['result']["user_id"] = int.parse(response['result']["user_id"]);
+    response['result']["shared_seats"] = int.parse(response['result']["shared_seats"]);
       return Right(TripModel.fromjson(response["result"]));
     }
     on ServerException catch (e) {
@@ -53,7 +54,7 @@ class TripRepository extends BaseTripRepository {
   Future<Either<Failure, TripEntity>> tripGet({required int trip_id}) async {
     try {
     var response = await baseUserRemoteDataSource
-        .getRequest("http://192.168.1.3:9000/api/trip/$trip_id");
+        .getRequest("$PATH/trip/$trip_id");
     // try {
       //print(response);
       var trip_list = TripModel.fromjson(response["result"]);
@@ -69,7 +70,7 @@ class TripRepository extends BaseTripRepository {
   Future<Either<Failure, List<TripEntity>>> tripGetAll() async {
     try {
     var response = await baseUserRemoteDataSource
-        .getRequest("http://192.168.1.3:9000/api/trip");
+        .getRequest("$PATH/trip");
     // try {
       //print(response);
       var trip_list = List<TripModel>.from(
@@ -87,7 +88,7 @@ class TripRepository extends BaseTripRepository {
       {required int user_id}) async {
     try {
     var response = await baseUserRemoteDataSource
-        .getRequest("http://192.168.1.3:9000/api/user_trips/$user_id");
+        .getRequest("$PATH/user_trips/$user_id");
     // try {
       //print(response);
       var trip_list = List<TripModel>.from(
@@ -111,7 +112,7 @@ class TripRepository extends BaseTripRepository {
       required String user_cluster}) async {
     try {
     var response = await baseUserRemoteDataSource
-        .postRequest("http://192.168.1.10:9000/api/trip/$id", {
+        .postRequest("$PATH/trip/$id", {
       "_method": "PUT",
       "start_location": start_location,
       "end_location": end_location,
@@ -134,7 +135,7 @@ class TripRepository extends BaseTripRepository {
   Future<Either<Failure, TripEntity>> tripDelete({required int id}) async {
     try {
     var response = await baseUserRemoteDataSource
-        .deleteRequest("http://192.168.1.10:9000/api/trip/$id");
+        .deleteRequest("$PATH/trip/$id");
     // try {
       print(response["result"]);
 

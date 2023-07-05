@@ -68,29 +68,3 @@ Future<File> get_image() async
 }
 
 
-Future<LatLng> _getLatLngFromAddress(String address) async {
-  try {
-    List<Location> locations = await locationFromAddress(address);
-
-    if (locations.isNotEmpty) {
-      Location location = locations.first;
-      LatLng latLng = LatLng(location.latitude, location.longitude);
-
-      // Create a new Marker object and add it to the _markers set
-      // setState(() {
-      //   _markers.add(
-      //     Marker(
-      //       markerId: MarkerId('destination'),
-      //       position: latLng,
-      //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-      //       infoWindow: InfoWindow(title: address),
-      //     ),
-      //   );
-      // });
-      return latLng;
-    }
-  } catch (e) {
-    print(e);
-  }
-  return LatLng(0, 0);
-}

@@ -10,7 +10,7 @@ import 'package:gp/user/presentation/controller/login/login_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../AboutUS/AboutUS.dart';
-import '../../../../Riders/RidersListPage.dart';
+import 'RidersListPage.dart';
 import '../../../../Setting/SettingPage.dart';
 import '../../../../core/shared_components/Constants.dart';
 import '../../../../map/location.dart';
@@ -65,6 +65,20 @@ class _HomePageState extends State<HomePage>
     return BlocConsumer<TripCubit, TripStates>(
     listener: (context, state) {
 
+      if(state is TripGetAllUsersRaidersSuccessState)
+        {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const RidersListPage()));
+        }
+      if(state is TripGetAllUsersDriversSuccessState)
+        {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const DriversListPage()));
+        }
     },
     builder: (context, state) {
       var cubit= TripCubit.get(context);
@@ -174,7 +188,10 @@ class _HomePageState extends State<HomePage>
                       physics: const BouncingScrollPhysics(),
                       onTap: (int index) {
 
-                        print('Tab $index is tapped');
+                        if(index==2)
+                          {
+                            cubit.getUserTrips(user_id: cubit.userModel!.id);
+                          }
 
                       },
                       enableFeedback: true,
@@ -188,6 +205,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           drawer: Drawer(
+
             child: ListView(
               // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
@@ -207,11 +225,12 @@ class _HomePageState extends State<HomePage>
                         //       color: Colors.white,
                         //       size: 80,
                         //     )),
-                        CircleAvatar(
-                          radius: 35,
-                         //backgroundColor: Colors.black,
-                          backgroundImage: NetworkImage("$ImagePath${LoginCubit.get(context).userModel?.personal_image}"),
-                        ),
+                        // CircleAvatar(
+                        //   radius: 35,
+                        //  //backgroundColor: Colors.black,
+                        //
+                        //   backgroundImage: NetworkImage("$ImagePath${LoginCubit.get(context).userModel?.personal_image}"),
+                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -244,10 +263,8 @@ class _HomePageState extends State<HomePage>
                   title:
                       const Text('Riders List', style: TextStyle(fontSize: 17)),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RidersListPage()));
+                    cubit.getAllUsersRidersDrivers(user_type: 0);
+
                   },
                 ),
                 ListTile(
@@ -258,10 +275,12 @@ class _HomePageState extends State<HomePage>
                   title:
                       const Text('Drivers List', style: TextStyle(fontSize: 17)),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DriversListPage()));
+                    cubit.getAllUsersRidersDrivers(user_type: 1);
+
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const DriversListPage()));
                   },
                 ),
                 ListTile(

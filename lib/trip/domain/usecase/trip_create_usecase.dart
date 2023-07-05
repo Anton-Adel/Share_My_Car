@@ -25,7 +25,6 @@ class TripCreateUseCase extends BaseUseCase<TripEntity, Parameter_trip_create> {
     user_cluster: parameter.user_cluster,
       start_date: parameter.start_date,
       shared_seats: parameter.shared_seats
-
     );
   }
 }

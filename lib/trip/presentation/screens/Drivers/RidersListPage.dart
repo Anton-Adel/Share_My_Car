@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gp/AboutUS/AboutUS.dart';
-import 'package:gp/Notifications/NotificationsPage.dart';
+import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 import 'package:gp/trip/presentation/controller/trip_state.dart';
-import 'package:gp/trip/presentation/screens/Drivers/RidersListPage.dart';
-import 'package:gp/Setting/SettingPage.dart';
 
+
+import '../../../../AboutUS/AboutUS.dart';
+
+import '../../../../Notifications/NotificationsPage.dart';
+import '../../../../Setting/SettingPage.dart';
 import '../../../../core/shared_components/Constants.dart';
-import '../../controller/trip_cubit.dart';
+import 'DriversListPage.dart';
 import 'ProfilePage.dart';
 
-class DriversListPage extends StatelessWidget {
-  const DriversListPage({Key? key}) : super(key: key);
+class RidersListPage extends StatelessWidget {
+  const RidersListPage({Key? key}) : super(key: key);
 
-  @override
   Widget build(BuildContext context) {
     return BlocConsumer<TripCubit, TripStates>(
   listener: (context, state) {
     // TODO: implement listener
   },
   builder: (context, state) {
-    var cubit = TripCubit.get(context);
+    var cubit =TripCubit.get(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(150),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0,30,0,0),
+          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
           child: AppBar(
             iconTheme: const IconThemeData(color: Color(0xFF442268)),
             centerTitle: true,
             title: const Text(
-              'Drivers List',
+              'Riders List',
               style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -57,15 +58,14 @@ class DriversListPage extends StatelessWidget {
                             color: Colors.white, fontSize: 20),
                         title: const Text(
                           'Cancel',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 20),
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         content: const Text(
                             'You will cancel the trip and go to home. Are you sure?'),
                         actions: [
                           ElevatedButton(
-                            onPressed: () =>
-                                Navigator.pop(context, 'Yes'),
+                            onPressed: () => Navigator.pop(context, 'Yes'),
                             style: ElevatedButton.styleFrom(
                                 primary: const Color(0XFFD4C9D6),
                                 padding: EdgeInsets.all(11),
@@ -110,6 +110,7 @@ class DriversListPage extends StatelessWidget {
           ),
         ),
       ),
+     
       body: ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -142,7 +143,7 @@ class DriversListPage extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: 40,
                                 backgroundImage: NetworkImage(
-                                  '$ImagePath${cubit.driversList[index]
+                                  '$ImagePath${cubit.raidersList[index]
                                       .personal_image}',
 
                                 ),
@@ -162,9 +163,9 @@ class DriversListPage extends StatelessWidget {
                                           fontWeight: FontWeight
                                               .w400),),
                                       Expanded(child: Text(
-                                        "${cubit.driversList[index]
+                                        "${cubit.raidersList[index]
                                             .first_name} ${cubit
-                                            .driversList[index]
+                                            .raidersList[index]
                                             .last_name}",
                                         style: TextStyle(fontSize: 18,
                                             fontWeight: FontWeight
@@ -179,7 +180,7 @@ class DriversListPage extends StatelessWidget {
                                                 .w400),),
                                       //SizedBox(width: 10,),
                                       Expanded(child: Text(
-                                        "${cubit.driversList[index]
+                                        "${cubit.raidersList[index]
                                             .phone_number}",
                                         style: TextStyle(fontSize: 18,
                                             fontWeight: FontWeight
@@ -193,9 +194,9 @@ class DriversListPage extends StatelessWidget {
                                           fontWeight: FontWeight
                                               .w400),),
                                       Expanded(child: Text(
-                                        "${cubit.driversList[index]
+                                        "${cubit.raidersList[index]
                                             .car_model} | ${cubit
-                                            .driversList[index]
+                                            .raidersList[index]
                                             .car_plate_number}",
                                         style: TextStyle(fontSize: 18,
                                             fontWeight: FontWeight
@@ -266,10 +267,9 @@ class DriversListPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-          itemCount: cubit.driversList.length),
+          itemCount: cubit.raidersList.length)
     );
   },
 );
   }
 }
-

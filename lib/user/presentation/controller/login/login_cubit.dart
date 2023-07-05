@@ -33,8 +33,8 @@ class LoginCubit extends Cubit<LoginState> {
       }, (r) {
         print(r.id);
         userModel = r as UserModel?;
-         Token+=userModel!.token;
-         print(Token);
+         // Token+=userModel!.token;
+
         emit(LoginSuccessState());
       });
     }).catchError((e) {

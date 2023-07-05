@@ -7,7 +7,7 @@ import '../Notifications/NotificationsPage.dart';
 import '../Setting/SettingPage.dart';
 
 import '../AboutUS/AboutUS.dart';
-import '../Riders/RidersListPage.dart';
+import '../trip/presentation/screens/Drivers/RidersListPage.dart';
 import '../trip/presentation/screens/Drivers/DriversListPage.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

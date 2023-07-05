@@ -38,7 +38,7 @@ class TripRepository extends BaseTripRepository {
       "shared_seats": shared_seats
     });
 
-      print(response["result"]);
+      // print(response["result"]);
 
       response['result']["user_id"] = int.parse(response['result']["user_id"]);
     response['result']["shared_seats"] = int.parse(response['result']["shared_seats"]);
@@ -75,7 +75,7 @@ class TripRepository extends BaseTripRepository {
       //print(response);
       var trip_list = List<TripModel>.from(
           (response["result"] as List).map((e) => TripModel.fromjson(e)));
-      print(trip_list);
+      // print(trip_list);
       return Right(trip_list);
       //return Right(List<UserEntity>.from((response.data["results"] as List).map((e) => UserModel.fromjson(e))));
     } on ServerException catch (e) {
@@ -103,13 +103,16 @@ class TripRepository extends BaseTripRepository {
 
   @override
   Future<Either<Failure, TripEntity>> tripUpdate(
-      {required int id,
+      {required String id,
       required String start_location,
       required String end_location,
       required String start_time,
+        required String start_date,
       String? end_time,
       required String user_id,
-      required String user_cluster}) async {
+      required String user_cluster,
+      String? shared_seats
+      }) async {
     try {
     var response = await baseUserRemoteDataSource
         .postRequest("$PATH/trip/$id", {
@@ -117,9 +120,11 @@ class TripRepository extends BaseTripRepository {
       "start_location": start_location,
       "end_location": end_location,
       "start_time": start_time,
+      'start_date':start_date,
       "end_time": end_time ?? "00:00:00",
       "user_id": user_id,
-      'user_cluster': user_cluster
+      'user_cluster': user_cluster,
+      'shared_seats':shared_seats
     });
     // try {
       print(response["result"]);

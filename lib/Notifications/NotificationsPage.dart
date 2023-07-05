@@ -4,7 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../AboutUS/AboutUS.dart';
 
 import '../Notifications/NotificationsPage.dart';
-import '../Riders/RidersListPage.dart';
+import '../trip/presentation/screens/Drivers/RidersListPage.dart';
 import '../Setting/SettingPage.dart';
 import '../trip/presentation/screens/Drivers/DriversListPage.dart';
 import '../trip/presentation/screens/Drivers/ProfilePage.dart';

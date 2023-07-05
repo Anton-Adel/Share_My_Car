@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 import '../Notifications/NotificationsPage.dart';
-import '../Riders/RidersListPage.dart';
+import '../trip/presentation/screens/Drivers/RidersListPage.dart';
 import '../Setting/SettingPage.dart';
 import '../trip/presentation/screens/Drivers/DriversListPage.dart';
 

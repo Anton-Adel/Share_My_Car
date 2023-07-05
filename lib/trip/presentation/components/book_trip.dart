@@ -10,6 +10,7 @@ import 'package:gp/trip/presentation/controller/trip_state.dart';
 import 'package:gp/trip/presentation/screens/Drivers/ProfilePage.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/shared_components/Constants.dart';
 import '../../../map/location.dart';
 import '../screens/Drivers/Home.dart';
 
@@ -215,7 +216,7 @@ class BookTrip extends StatelessWidget {
                           );
 
                           if (pickedTime != null) {
-                            print(pickedTime); 
+                            print(pickedTime);
                             String formattedTime = pickedTime.format(context);
 
                             print(formattedTime);
@@ -223,7 +224,8 @@ class BookTrip extends StatelessWidget {
                             //   startTimeController.text = formattedTime;
                             // });
 
-                            cubit.display_date_time(formattedTime, cubit.startTimeController);
+                            cubit.display_date_time(
+                                formattedTime, cubit.startTimeController);
                           }
                         },
                       ),
@@ -249,8 +251,9 @@ class BookTrip extends StatelessWidget {
                                 start_time: cubit.startTimeController.text,
                                 start_date: cubit.startDateController.text);
                           }
-                          ShowToast("Search for appropriate drivers", ToastState.Success);
-                          cubit.getAllUsers();
+                          ShowToast("Search for appropriate drivers",
+                              ToastState.Success);
+                          //cubit.getAllUsers();
                           // cubit.eslam();
                         },
                       ),
@@ -266,8 +269,9 @@ class BookTrip extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) =>
                       InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
+                        onTap: () {
+                          print(cubit.userList[index].personal_image);
+                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
                         },
                         child: Card(
                           elevation: 10,
@@ -277,7 +281,8 @@ class BookTrip extends StatelessWidget {
 
                             decoration: BoxDecoration(
                               color: const Color(0xFFF1F1F1),
-                              border: Border.all(color: Colors.black12, width: 2),
+                              border: Border.all(
+                                  color: Colors.black12, width: 2),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Column(
@@ -285,13 +290,15 @@ class BookTrip extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const CircleAvatar(
+                                    CircleAvatar(
                                       radius: 40,
-                                      backgroundColor: Color(0xFF442268),
+                                      //backgroundColor: Color(0xFF442268),
                                       child: CircleAvatar(
-                                        backgroundImage: AssetImage(
-                                            'assets/Anton.jpeg'),
-                                        radius: 43.5,
+                                        backgroundImage: NetworkImage(
+                                          '$ImagePath${cubit.userModel
+                                              ?.personal_image}',
+
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(width: 10,),
@@ -302,37 +309,47 @@ class BookTrip extends StatelessWidget {
 
                                         children: [
                                           Row(
-                                            children: const [
-                                              Text("Name:", style: TextStyle(
+                                            children: [
+                                              Text("Name: ", style: TextStyle(
                                                   fontSize: 22,
-                                                  fontWeight: FontWeight.w400),),
+                                                  fontWeight: FontWeight
+                                                      .w400),),
                                               Expanded(child: Text(
-                                                "Eslam Khaled Eid",
+                                                "${cubit.userList[index]
+                                                    .first_name} ${cubit
+                                                    .userList[index]
+                                                    .last_name}",
                                                 style: TextStyle(fontSize: 18,
                                                     fontWeight: FontWeight
                                                         .w400),)),
                                             ],
                                           ),
                                           Row(
-                                            children: const [
-                                              Text("Phone number:",
+                                            children: [
+                                              Text("Phone number: ",
                                                 style: TextStyle(fontSize: 18,
                                                     fontWeight: FontWeight
                                                         .w400),),
                                               //SizedBox(width: 10,),
-                                              Expanded(child: Text("01064643135",
+                                              Expanded(child: Text(
+                                                "${cubit.userList[index]
+                                                    .phone_number}",
                                                 style: TextStyle(fontSize: 18,
                                                     fontWeight: FontWeight
                                                         .w400),)),
                                             ],
                                           ),
                                           Row(
-                                            children: const [
+                                            children: [
                                               Text("Car:", style: TextStyle(
                                                   fontSize: 20,
-                                                  fontWeight: FontWeight.w400),),
+                                                  fontWeight: FontWeight
+                                                      .w400),),
                                               Expanded(child: Text(
-                                                "Grey | Peugeot 3008",
+                                                "${cubit.userList[index]
+                                                    .car_model} | ${cubit
+                                                    .userList[index]
+                                                    .car_plate_number}",
                                                 style: TextStyle(fontSize: 18,
                                                     fontWeight: FontWeight
                                                         .w400),)),
@@ -402,13 +419,19 @@ class BookTrip extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () {
-                                    // if (formKey.currentState!.validate()) {
-                                    //   cubit.postBookTrip(
-                                    //       start_address: cubit.startAddressController.text,
-                                    //       end_address: cubit.endAddressController.text,
-                                    //       start_time: cubit.startTimeController.text,
-                                    //       start_date: cubit.startDateController.text);
-                                    // }
+                                    cubit.updateTrip(
+                                        start_address: cubit.tripList[index].start_location,
+                                        end_address: cubit.tripList[index].end_location,
+                                        start_time: cubit.tripList[index].start_time,
+                                        start_date: cubit.tripList[index].start_date,
+                                        user_id: cubit.tripList[index].user_id.toString(),
+                                        user_cluster: cubit.tripList[index].user_cluster,
+                                        id: cubit.tripList[index].id.toString(),
+                                        Shared_seats: ((cubit.tripList[index].shared_seats)!-1).toString(),
+                                        email: cubit.userList[index].email,
+                                        phone: cubit.userList[index].phone_number,
+                                        f_name: cubit.userList[index].first_name,
+                                        l_name: cubit.userList[index].last_name);
                                     ShowToast("Take Car Confirmed", ToastState.TakeCar);
                                     // cubit.eslam();
                                   },
@@ -424,7 +447,7 @@ class BookTrip extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                  itemCount: 0)
+                  itemCount: cubit.userList.length)
             ],
           ),
         );

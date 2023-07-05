@@ -70,6 +70,30 @@ void main() async {
   // UserRepository(baseUserRemoteDataSource);
   // UserLoginUseCase userLoginUseCase = UserLoginUseCase(baseUserRepository);
   // userLoginUseCase(Parameter_login(email: "anton0001@gmail.com", password: "1234567891"));
+
+  // BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+  // BaseTripRepository baseTripRepository = TripRepository(
+  //     baseUserRemoteDataSource);
+  // TripUpdateUseCase tripUpdateUseCase = TripUpdateUseCase(baseTripRepository);
+  // tripUpdateUseCase(Parameter_trip_update(
+  //   start_date: '2023-2-20',
+  //     start_location: "start_address",
+  //     end_location: "end_address",
+  //     start_time: "12:20 PM",
+  //     user_id: "21",
+  //     user_cluster: "1",
+  //     id: "13",
+  //     shared_seats: "0"
+  // ));
+
+ //  BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
+ // await baseUserRemoteDataSource.postRequest("$PATH/sendconfirm",
+ //      {
+ //        "first_name": "f_name",
+ //        "last_name": "l_name",
+ //        "email": "antonadel6114@gmail.com",
+ //        'phone':"133654564"
+ //      });
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

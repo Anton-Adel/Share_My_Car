@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../AboutUS/AboutUS.dart';
 
 import '../Notifications/NotificationsPage.dart';
-import '../Riders/RidersListPage.dart';
+import '../trip/presentation/screens/Drivers/RidersListPage.dart';
 import '../trip/presentation/screens/Drivers/DriversListPage.dart';
 
 class SettingPage extends StatefulWidget {

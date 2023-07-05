@@ -47,7 +47,7 @@ class ShareCarTrip extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = TripCubit.get(context);
-        return SingleChildScrollView(
+        return cubit.userModel!.have_car==1? SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -506,7 +506,11 @@ class ShareCarTrip extends StatelessWidget {
                   itemCount: 0)
             ],
           ),
-        );
+        ):
+
+            Center(child: Text("You don’t have a car to share",style: TextStyle
+              ( fontSize: 30,color: Colors.grey,fontWeight: FontWeight.bold),));
+        ;
       },
     );
   }

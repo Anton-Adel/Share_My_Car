@@ -18,6 +18,7 @@ class MyTrips extends StatelessWidget
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -66,37 +67,44 @@ class MyTrips extends StatelessWidget
 
                                           children: [
                                             Row(
-                                              children: const [
-                                                Text("Name:", style: TextStyle(
+                                              children:  [
+                                                Text("Start location: ",
+                                                  style: TextStyle(
                                                     fontSize: 22,
-                                                    fontWeight: FontWeight.w400),),
+                                                    fontWeight: FontWeight.w400),
+
+                                                ),
                                                 Expanded(child: Text(
-                                                  "Eslam Khaled Eid",
+                                                  "${cubit.user_trips_list[index].start_location}",
                                                   style: TextStyle(fontSize: 18,
                                                       fontWeight: FontWeight
-                                                          .w400),)),
+                                                          .w400),
+                                                maxLines: 2,
+                                                  overflow:TextOverflow.ellipsis ,
+                                                )),
                                               ],
                                             ),
                                             Row(
-                                              children: const [
-                                                Text("Phone number:",
+                                              children:  [
+                                                Text("End location: ",
                                                   style: TextStyle(fontSize: 18,
                                                       fontWeight: FontWeight
                                                           .w400),),
                                                 //SizedBox(width: 10,),
-                                                Expanded(child: Text("01064643135",
+                                                Expanded(child: Text("${cubit.user_trips_list[index].end_location}",
                                                   style: TextStyle(fontSize: 18,
                                                       fontWeight: FontWeight
-                                                          .w400),)),
+                                                          .w400),maxLines: 2,
+                                                  overflow:TextOverflow.ellipsis ,)),
                                               ],
                                             ),
                                             Row(
-                                              children: const [
-                                                Text("Car:", style: TextStyle(
+                                              children:  [
+                                                Text("Date: ", style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w400),),
                                                 Expanded(child: Text(
-                                                  "Grey | Peugeot 3008",
+                                                  "${cubit.user_trips_list[index].start_date}",
                                                   style: TextStyle(fontSize: 18,
                                                       fontWeight: FontWeight
                                                           .w400),)),
@@ -188,7 +196,7 @@ class MyTrips extends StatelessWidget
                         SizedBox(
                           height: 10,
                         ),
-                    itemCount: 10)
+                    itemCount: cubit.user_trips_list.length)
               ],
             ),
           );

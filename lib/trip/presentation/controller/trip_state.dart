@@ -26,3 +26,34 @@ class TripGetAllTripsErrorState extends TripStates{}
 
 
 class TripToLocationState extends TripStates{}
+
+
+
+class TripUpdateTripsLoadingState extends TripStates{}
+class TripUpdateTripsSuccessState extends TripStates{}
+class TripUpdateTripsErrorState extends TripStates{}
+
+
+
+class TripSendConfirmLoadingState extends TripStates{}
+class TripSendConfirmSuccessState extends TripStates{}
+class TripSendConfirmErrorState extends TripStates{}
+
+
+
+class TripGetUserTripsLoadingState extends TripStates{}
+class TripGetUserTripsSuccessState extends TripStates{}
+class TripGetUserTripsErrorState extends TripStates{}
+
+
+
+class TripGetAllUsersRaidersDriversLoadingState extends TripStates{}
+class TripGetAllUsersRaidersSuccessState extends TripStates{}
+class TripGetAllUsersRaidersDriversErrorState extends TripStates{}
+
+class TripGetAllUsersDriversSuccessState extends TripStates{}
+
+
+
+
+

@@ -24,13 +24,15 @@ abstract class BaseTripRepository {
 
   Future<Either<Failure, TripEntity>> tripUpdate(
       {
-        required int id,
+        required String id,
         required String start_location,
         required String end_location,
         required String start_time,
+        required String start_date,
         String? end_time,
         required String user_id,
-        required String user_cluster
+        required String user_cluster,
+        String? shared_seats,
       }
 
       );

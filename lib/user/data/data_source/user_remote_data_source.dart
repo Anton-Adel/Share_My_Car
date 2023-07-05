@@ -21,7 +21,7 @@ abstract class BaseUserRemoteDataSource {
 class UserRemoteDataSource extends BaseUserRemoteDataSource {
   @override
   postRequest(String uri, Map data) async {
-    print(Token);
+    // print(Token);
     var response = await http.post(Uri.parse(uri), body: data,
         headers: {
           "Accept": "application/json",
@@ -126,6 +126,7 @@ class UserRemoteDataSource extends BaseUserRemoteDataSource {
 
   @override
   getRequest(String uri) async {
+    // print(Token);
     var response = await http.get(Uri.parse(uri), headers: {
       "Accept": "application/json",
       "Authorization":Token
@@ -134,6 +135,7 @@ class UserRemoteDataSource extends BaseUserRemoteDataSource {
     if (response.statusCode == 200) {
       print("get done");
      // print(jsonDecode(response.body));
+
       return jsonDecode(response.body);
     } else {
       print("error get");

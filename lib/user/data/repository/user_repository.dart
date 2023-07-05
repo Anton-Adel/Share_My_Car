@@ -24,7 +24,7 @@ class UserRepository extends BaseUserRepository{
     {
       //print(respons);
       //var x=List<UserEntity>.from((respons["result"] as List).map((e) => UserModel.fromjson(e)));
-      print(respons["result"]['have_car']);
+      //print(respons["result"]['have_car']);
       return Right(UserModel.fromjson(respons["result"] ));
       //return Right(List<UserEntity>.from((respons.data["results"] as List).map((e) => UserModel.fromjson(e))));
     }
@@ -36,7 +36,7 @@ class UserRepository extends BaseUserRepository{
 
   @override
   Future<Either<Failure, List<UserEntity>>> userGetAll() async {
-    var respons= await baseUserRemoteDataSource.getRequest("http://192.168.1.3:9000/api/user");
+    var respons= await baseUserRemoteDataSource.getRequest("$PATH/user");
     try
     {
       //print(respons);
@@ -61,7 +61,11 @@ class UserRepository extends BaseUserRepository{
     try
     {
 
+      Token+=respons["result"]["token"];
+      print("token");
+      print(Token);
       return Right(UserModel.fromjson(respons["result"]));
+
     } on ServerException catch(e)
     {
       return Left(Failure(e.errorMessageModel.message));
@@ -72,7 +76,7 @@ class UserRepository extends BaseUserRepository{
 
   @override
   Future<Either<Failure, Map<String, dynamic>>> userRegister({required UserPostModel userPostModel}) async{
-    var respons= await baseUserRemoteDataSource.postWithImage("http://192.168.1.10:9000/api/register", {
+    var respons= await baseUserRemoteDataSource.postWithImage("$PATH/register", {
       "first_name": userPostModel.first_name,
       "last_name":userPostModel.last_name,
       "gender": userPostModel.gender,
@@ -119,7 +123,7 @@ class UserRepository extends BaseUserRepository{
   @override
   Future<Either<Failure, UserEntity>> userUpdate({required UserPostModel userPostModel,required int id}) async {
 
-    var respons= await baseUserRemoteDataSource.updateRequest("http://192.168.1.10:9000/api/user/$id", {
+    var respons= await baseUserRemoteDataSource.updateRequest("$PATH/user/$id", {
 
       "_method":"PUT",
       "first_name": userPostModel.first_name,

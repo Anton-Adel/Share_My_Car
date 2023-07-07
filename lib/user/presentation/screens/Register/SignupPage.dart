@@ -32,7 +32,14 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        // TODO: implement listener
+        // if(state is TripToLocationState)
+        //   {
+        //     Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) =>
+        //                 LocationPage(backPage: SignUpPage(),)));
+        //   }
       },
       builder: (context, state) {
         var cubit = RegisterCubit.get(context);

@@ -24,6 +24,10 @@ class LoginPage extends StatelessWidget {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
           });
 
+          if(state is LoginErrorState)
+            {
+              ShowToast("Check your data your enter", ToastState.Success);
+            }
         }
 
 

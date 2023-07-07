@@ -323,6 +323,7 @@ class CarInfo extends StatelessWidget {
                             cubit.userPostModel?.car_image=cubit.CarImage;
                             cubit.userPostModel?.car_plate_image=cubit.paletImage;
                             cubit.userPostModel?.car_license_image=cubit.licenseImage;
+                            cubit.userPostModel?.car_seats= cubit.carseatnumber.text;
 
                             print(cubit.userPostModel?.city);
                             // print(carcolor.text);

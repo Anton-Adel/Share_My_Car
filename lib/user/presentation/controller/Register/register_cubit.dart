@@ -115,6 +115,44 @@ class RegisterCubit extends Cubit<RegisterState> {
         Code = value['result']['code'];
 
         print("code is $Code");
+
+
+
+         personalImage.text = "";
+         idCardImage.text = "";
+         carimage.text = "";
+         carplateimage.text = "";
+         carlicenseimage.text = "";
+
+         fnameController.text = "";
+         lnameController.text = "";
+
+
+         emailController.text = "";
+         passwordController.text = "";
+         CountryController.text = "";
+         CityController.text = "";
+         phoneController.text = "";
+         addressController.text = "";
+         ageController.text = "";
+         idController.text = "";
+         PersonalImage=null;
+         CardImage=null;
+
+
+        // car info
+         carmodel = TextEditingController();
+         carcolor = TextEditingController();
+         carplatenumber = TextEditingController();
+
+         carseatnumber = TextEditingController();
+
+
+       CarImage=null;
+        paletImage=null;
+        licenseImage=null;
+
+
         emit(RegisterSendCodeSuccessState());
       }).catchError((e) {
         print(e.toString());
@@ -165,6 +203,8 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void Register()
   {
+    print("Antonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    print(userPostModel!.cluster_number);
     emit(RegisterLoadingState());
     BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();
     BaseUserRepository baseUserRepository =

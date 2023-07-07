@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/core/shared_components/shared.dart';
+import 'package:gp/trip/presentation/controller/trip_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_cubit.dart';
 import 'package:gp/user/presentation/controller/Register/register_state.dart';
 import 'package:gp/user/presentation/screens/Login/LoginPage.dart';
@@ -134,6 +135,8 @@ class verfication extends StatelessWidget {
                   onPressed: () {
                     if(int.parse(code)==Code)
                       {
+                        TripCubit.get(context).startAddressController.text="";
+                        TripCubit.get(context).from_register=0;
                         cubit.Register();
                       }
                   },

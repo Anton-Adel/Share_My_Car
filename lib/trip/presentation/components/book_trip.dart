@@ -43,7 +43,15 @@ class BookTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<TripCubit, TripStates>(
       listener: (context, state) {
-        // TODO: implement listener
+       if(state is TripGetAllTripsSuccessState && TripCubit.get(context).userList.length==0)
+         {
+           ShowToast("There is no availble drivers in current time", ToastState.Success);
+           TripCubit.get(context).startAddressController.text="";
+           TripCubit.get(context).endAddressController.text="";
+           TripCubit.get(context).startDateController.text="";
+           TripCubit.get(context).startTimeController.text="";
+
+         }
       },
       builder: (context, state) {
         var cubit = TripCubit.get(context);
@@ -166,7 +174,7 @@ class BookTrip extends StatelessWidget {
                               initialDate: DateTime.now(),
                               firstDate: DateTime(1950),
                               //DateTime.now() - not to allow to choose before today.
-                              lastDate: DateTime.now());
+                              lastDate: DateTime.now().add(Duration(days: 30)));
                           if (pickedDate != null) {
                             print(
                                 pickedDate); //pickedDate output format => 2021-03-10
@@ -269,10 +277,6 @@ class BookTrip extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) =>
                       InkWell(
-                        onTap: () {
-                          print(cubit.userList[index].personal_image);
-                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
-                        },
                         child: Card(
                           elevation: 10,
                           child: Container(
@@ -294,9 +298,10 @@ class BookTrip extends StatelessWidget {
                                       radius: 40,
                                       //backgroundColor: Color(0xFF442268),
                                       child: CircleAvatar(
+                                        radius: 40,
                                         backgroundImage: NetworkImage(
-                                          '$ImagePath${cubit.userModel
-                                              ?.personal_image}',
+                                          '$ImagePath${cubit.userList[index]
+                                              .personal_image}',
 
                                         ),
                                       ),
@@ -311,7 +316,7 @@ class BookTrip extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text("Name: ", style: TextStyle(
-                                                  fontSize: 22,
+                                                  fontSize: 20,
                                                   fontWeight: FontWeight
                                                       .w400),),
                                               Expanded(child: Text(
@@ -341,7 +346,7 @@ class BookTrip extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              Text("Car:", style: TextStyle(
+                                              Text("Car: ", style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight
                                                       .w400),),
@@ -429,9 +434,9 @@ class BookTrip extends StatelessWidget {
                                         id: cubit.tripList[index].id.toString(),
                                         Shared_seats: ((cubit.tripList[index].shared_seats)!-1).toString(),
                                         email: cubit.userList[index].email,
-                                        phone: cubit.userList[index].phone_number,
-                                        f_name: cubit.userList[index].first_name,
-                                        l_name: cubit.userList[index].last_name);
+                                        phone: cubit.userModel!.phone_number,
+                                        f_name: cubit.userModel!.first_name,
+                                        l_name: cubit.userModel!.last_name);
                                     ShowToast("Take Car Confirmed", ToastState.TakeCar);
                                     // cubit.eslam();
                                   },

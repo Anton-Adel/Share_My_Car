@@ -225,12 +225,12 @@ class _HomePageState extends State<HomePage>
                         //       color: Colors.white,
                         //       size: 80,
                         //     )),
-                        // CircleAvatar(
-                        //   radius: 35,
-                        //  //backgroundColor: Colors.black,
-                        //
-                        //   backgroundImage: NetworkImage("$ImagePath${LoginCubit.get(context).userModel?.personal_image}"),
-                        // ),
+                        CircleAvatar(
+                          radius: 35,
+                         //backgroundColor: Colors.black,
+
+                          backgroundImage: NetworkImage("$ImagePath${LoginCubit.get(context).userModel?.personal_image}"),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -285,30 +285,30 @@ class _HomePageState extends State<HomePage>
                 ),
                 ListTile(
                   leading: const Icon(
-                    Icons.settings,
+                    Icons.logout,
                     color: Color(0xFF442268),
                   ),
-                  title: const Text('Setting', style: TextStyle(fontSize: 17)),
+                  title: const Text('Logout', style: TextStyle(fontSize: 17)),
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SettingPage()));
+                            builder: (context) =>  LoginPage()));
                   },
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.info,
-                    color: Color(0xFF442268),
-                  ),
-                  title: const Text('About Us', style: TextStyle(fontSize: 17)),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AboutUsPage()));
-                  },
-                ),
+                // ListTile(
+                //   leading: const Icon(
+                //     Icons.info,
+                //     color: Color(0xFF442268),
+                //   ),
+                //   title: const Text('About Us', style: TextStyle(fontSize: 17)),
+                //   onTap: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => const AboutUsPage()));
+                //   },
+                // ),
               ],
             ),
           ),

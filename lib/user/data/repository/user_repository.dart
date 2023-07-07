@@ -61,6 +61,7 @@ class UserRepository extends BaseUserRepository{
     try
     {
 
+      Token="Bearer ";
       Token+=respons["result"]["token"];
       print("token");
       print(Token);
@@ -101,6 +102,7 @@ class UserRepository extends BaseUserRepository{
       "trip_children": userPostModel.trip_children,
       "trip_pets":userPostModel.trip_pets,
       "car_seats": userPostModel.car_seats,
+      'cluster_number':userPostModel.cluster_number,
     },
 
       personal_image: userPostModel.personal_image!,

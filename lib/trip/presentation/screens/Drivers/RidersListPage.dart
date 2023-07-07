@@ -38,74 +38,7 @@ class RidersListPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF442268)),
             ),
-            actions: <Widget>[
-              // cancel Icon
-              IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Color(0xFF442268),
-                  ),
-                  onPressed: () => showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        contentPadding: const EdgeInsets.all(20),
-                        actionsPadding:
-                        const EdgeInsets.fromLTRB(0, 0, 65, 30),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        backgroundColor: const Color(0XFF2A1540),
-                        contentTextStyle: const TextStyle(
-                            color: Colors.white, fontSize: 20),
-                        title: const Text(
-                          'Cancel',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        content: const Text(
-                            'You will cancel the trip and go to home. Are you sure?'),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () => Navigator.pop(context, 'Yes'),
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0XFFD4C9D6),
-                                padding: EdgeInsets.all(11),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15)),
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF442268),
-                                )),
-                            child: const Text('Yes',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF442268),
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
-                          ElevatedButton(
-                            onPressed: () => Navigator.pop(context, 'No'),
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0XFFD4C9D6),
-                                padding: EdgeInsets.all(11),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15)),
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF442268),
-                                )),
-                            child: const Text(
-                              'No',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xFF442268),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )))
-            ],
+
             backgroundColor: const Color(0xFFFAFAFA),
           ),
         ),
@@ -187,22 +120,22 @@ class RidersListPage extends StatelessWidget {
                                                 .w400),)),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      Text("Car:", style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight
-                                              .w400),),
-                                      Expanded(child: Text(
-                                        "${cubit.raidersList[index]
-                                            .car_model} | ${cubit
-                                            .raidersList[index]
-                                            .car_plate_number}",
-                                        style: TextStyle(fontSize: 18,
-                                            fontWeight: FontWeight
-                                                .w400),)),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Text("Car:", style: TextStyle(
+                                  //         fontSize: 20,
+                                  //         fontWeight: FontWeight
+                                  //             .w400),),
+                                  //     Expanded(child: Text(
+                                  //       "${cubit.raidersList[index]
+                                  //           .car_model} | ${cubit
+                                  //           .raidersList[index]
+                                  //           .car_plate_number}",
+                                  //       style: TextStyle(fontSize: 18,
+                                  //           fontWeight: FontWeight
+                                  //               .w400),)),
+                                  //   ],
+                                  // ),
                                   // Row(
                                   //   children: const [
                                   //     Text("Distance:", style: TextStyle(

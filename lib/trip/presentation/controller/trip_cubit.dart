@@ -161,7 +161,7 @@ class TripCubit extends Cubit<TripStates> {
         end_location: end_address,
         start_time: start_time,
         user_id: userModel!.id.toString(),
-        user_cluster: "1",
+        user_cluster: userModel!.cluster_number.toString(),
         // from user
         start_date: start_date,
         shared_seats: "${seats ?? 0}",
@@ -172,9 +172,27 @@ class TripCubit extends Cubit<TripStates> {
         print(error);
         emit(TripBookTripErrorState());
       }, (r) {
+
         tripModel = r as TripModel?;
+
+
+         startTimeShareCarController.text = "";
+         startDateShareCarController.text = "";
+
+
+        //share car
+         startAddressShareCarController.text = "";
+         endAddressShareCarController.text = "";
+
+         seats=0;
+        c1 = Colors.white;
+        c2 = Colors.white;
+        c3 = Colors.white;
+        c4 = Colors.white;
+
         print(tripModel!.start_location);
         print("Anton");
+        print(tripModel);
         getAllUsers();
         emit(TripBookTripSuccessState());
       });
@@ -215,29 +233,33 @@ class TripCubit extends Cubit<TripStates> {
     tripGetAllUseCase(NoParameter()).then((value) {
       value.fold((l) {
         error = l;
-
         print(error);
         emit(TripGetAllTripsErrorState());
       }, (r) async {
         triplistCount = r.length;
+
+        print(triplistCount);
         r.forEach((element) async {
           triplistCount = triplistCount - 1;
-
           if (element.shared_seats != 0 &&
               element.user_cluster == "1" &&
               element.start_date == tripModel!.start_date &&
               element.end_location == tripModel!.end_location &&
               element.user_id != userModel!.id) {
+
             // هنا هنعمل جيل لكل يوزر ونحطه في ليس
             List<String> element_time = element.start_time.split(" ");
             List<String> user_time = tripModel!.start_time.split(" ");
             if (element_time[1] == user_time[1]) {
+
               element_time = element_time[0].split(":");
               user_time = user_time[0].split(":");
               int sub = (int.parse(element_time[0]) * 60 +
                   int.parse(element_time[1])) -
                   (int.parse(user_time[0]) * 60 + int.parse(user_time[1]));
+
               if (sub >= -20 && sub <= 20) {
+                print("ffffffffffffffffffffff");
                 var element_lang_lat =
                 await _getLatLngFromAddress_trip(element.start_location);
                 var user_lang_lat =
@@ -280,6 +302,14 @@ class TripCubit extends Cubit<TripStates> {
               }
             }
           }
+          else
+            {
+              if (triplistCount == 0) {
+                print(userList.length);
+                emit(TripGetAllTripsSuccessState());
+              }
+            }
+
         });
         // if (triplistCount == 0) {
         //   print(userList.length);

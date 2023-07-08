@@ -646,13 +646,8 @@ class PropertiesPage extends StatelessWidget {
                                     cubit.userPostModel?.trip_conditioner=cubit.Q5=="yes"?"1":"0";
                                     cubit.userPostModel?.trip_children=cubit.Q6=="yes"?"1":"0";
                                     cubit.userPostModel?.trip_pets=cubit.Q7=="yes"?"1":"0";
-
-
-                                    print(cubit.userPostModel?.trip_gender);
-                                    print(cubit.userPostModel?.first_name);
-
-
-                                     cubit.send_code();
+                                     //cubit.send_code();
+                                    cubit.get_cluster();
 
                                   }
                                 }

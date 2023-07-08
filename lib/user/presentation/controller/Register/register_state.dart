@@ -32,3 +32,11 @@ class RegisterSendCodeSuccessState extends RegisterState{}
 class RegisterSendCodeLoadingState extends RegisterState{}
 
 class RegisterSendCodeErrorState extends RegisterState{}
+
+
+
+class RegisterGetClusterSuccessState extends RegisterState{}
+
+class RegisterGetClusterLoadingState extends RegisterState{}
+
+class RegisterGetClusterErrorState extends RegisterState{}

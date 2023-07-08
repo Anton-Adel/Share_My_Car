@@ -145,6 +145,7 @@ class TripCubit extends Cubit<TripStates> {
     required String end_address,
     required String start_time,
     required String start_date,
+    required int from_book_trip
   }) {
     print(start_address);
     print(end_address);
@@ -171,19 +172,14 @@ class TripCubit extends Cubit<TripStates> {
         error = l;
         print(error);
         emit(TripBookTripErrorState());
-      }, (r) {
+      }, (r) async {
 
         tripModel = r as TripModel?;
-
-
+        //share car
          startTimeShareCarController.text = "";
          startDateShareCarController.text = "";
-
-
-        //share car
          startAddressShareCarController.text = "";
          endAddressShareCarController.text = "";
-
          seats=0;
         c1 = Colors.white;
         c2 = Colors.white;
@@ -193,7 +189,9 @@ class TripCubit extends Cubit<TripStates> {
         print(tripModel!.start_location);
         print("Anton");
         print(tripModel);
-        getAllUsers();
+        if(from_book_trip==1) {
+          await getAllUsers();
+        }
         emit(TripBookTripSuccessState());
       });
     }).catchError((e) {
@@ -222,7 +220,7 @@ class TripCubit extends Cubit<TripStates> {
 
   int triplistCount = -1;
 
-  void getAllUsers() async {
+  Future<void> getAllUsers() async {
     tripList = [];
     userList = [];
     emit(TripGetAllTripsLoadingState());
@@ -472,4 +470,9 @@ class TripCubit extends Cubit<TripStates> {
           emit(TripGetAllUsersRaidersDriversErrorState());
     });
   }
+
+
+
+
+
 }

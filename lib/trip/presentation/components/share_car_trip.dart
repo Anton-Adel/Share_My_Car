@@ -365,7 +365,9 @@ class ShareCarTrip extends StatelessWidget {
                                 .startAddressShareCarController.text,
                                 end_address: cubit.endAddressShareCarController.text,
                                 start_time: cubit.startTimeShareCarController.text,
-                                start_date: cubit.startDateShareCarController.text);
+                                start_date: cubit.startDateShareCarController.text,
+                            from_book_trip: 2
+                            );
                           }
                         },
                       ),

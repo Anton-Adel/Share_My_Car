@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -15,7 +16,7 @@ import '../../../../core/shared_components/Constants.dart';
 import '../../../data/data_source/user_remote_data_source.dart';
 import '../../../data/repository/user_repository.dart';
 import '../../../domain/repository/base_user_repository.dart';
-
+import 'package:http/http.dart' as http;
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitialState());
 
@@ -102,6 +103,40 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterQuestion());
   }
 
+
+  Future<void> get_cluster()
+  async {
+
+    emit(RegisterGetClusterLoadingState());
+    print(userPostModel!.trip_pets);
+     http.post(Uri.parse("http://192.168.1.10:5000/return_user_cluster"),body:
+    {
+      "Gender":userPostModel!.gender,
+      "Age":userPostModel!.age,
+      "smoker":userPostModel!.smoke,
+      "have_car":userPostModel!.have_car,
+      "share_smoker":userPostModel!.trip_smoke,
+      "share_gender":userPostModel!.trip_gender,
+      "share_music":userPostModel!.trip_music,
+      "share_air_conditioning":userPostModel!.trip_conditioner,
+      "share_children":userPostModel!.trip_children,
+      "share_animals":userPostModel!.trip_pets,
+    }
+    ).then((value){
+      print("eslam");
+      var response=jsonDecode(value.body);
+      print(response["cluster"]);
+      userPostModel!.cluster_number=response["cluster"].toString();
+      print(userPostModel!.cluster_number);
+      send_code();
+      emit(RegisterGetClusterSuccessState());
+     }).catchError((){
+       emit(RegisterGetClusterErrorState());
+     });
+
+
+}
+
   void send_code ()
   {
     try {
@@ -115,9 +150,6 @@ class RegisterCubit extends Cubit<RegisterState> {
         Code = value['result']['code'];
 
         print("code is $Code");
-
-
-
          personalImage.text = "";
          idCardImage.text = "";
          carimage.text = "";
@@ -184,17 +216,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterHaveCar());
   }
 
-  // void personal_image_controller(value,)
-  // {
-  //   personalImage.text=value;
-  //   emit(RegisterPersonalImageController());
-  // }
-  // void card_image_controller(value)
-  // {
-  //   idCardImage.text=value;
-  //   emit(RegisterCardImageController());
-  //
-  // }
+
   void display_image_name(value,TextEditingController controller)
   {
     controller.text=value;
@@ -203,7 +225,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void Register()
   {
-    print("Antonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    //print("Antonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     print(userPostModel!.cluster_number);
     emit(RegisterLoadingState());
     BaseUserRemoteDataSource baseUserRemoteDataSource = UserRemoteDataSource();

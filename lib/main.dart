@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +32,7 @@ import 'core/shared_components/Constants.dart';
 import 'user/presentation/screens/Login/LoginPage.dart';
 import 'user/presentation/screens/Register/SignupPage.dart';
 import 'user/presentation/screens/Register/Verfication.dart';
+
 
 void main() async {
   // BaseUserRemoteDataSource baseUserRemoteDataSource=UserRemoteDataSource();
@@ -94,6 +97,13 @@ void main() async {
  //        "email": "antonadel6114@gmail.com",
  //        'phone':"133654564"
  //      });
+
+
+  // print("eslam");
+  //
+  // print(jsonDecode(response.body));
+  // print("eslam khaled");
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

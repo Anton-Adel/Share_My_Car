@@ -750,8 +750,9 @@ class SignUpPage extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => CarInfo()));
-                              } else {
-                                ShowToast("please Check your gmail",
+                              }
+                              else {
+                                ShowToast("please enter your properties",
                                     ToastState.Success);
                                 // not have a car
                                 Navigator.push(

@@ -43,14 +43,9 @@ class BookTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<TripCubit, TripStates>(
       listener: (context, state) {
-       if(state is TripGetAllTripsSuccessState && TripCubit.get(context).userList.length==0)
+       if(state is TripBookTripSuccessState && TripCubit.get(context).userList.length==0)
          {
-           ShowToast("There is no availble drivers in current time", ToastState.Success);
-           TripCubit.get(context).startAddressController.text="";
-           TripCubit.get(context).endAddressController.text="";
-           TripCubit.get(context).startDateController.text="";
-           TripCubit.get(context).startTimeController.text="";
-
+           ShowToast("There is no available drivers in current time", ToastState.Success);
          }
       },
       builder: (context, state) {
@@ -257,7 +252,10 @@ class BookTrip extends StatelessWidget {
                                 start_address: cubit.startAddressController.text,
                                 end_address: cubit.endAddressController.text,
                                 start_time: cubit.startTimeController.text,
-                                start_date: cubit.startDateController.text);
+                                start_date: cubit.startDateController.text,
+                              from_book_trip: 1
+
+                            );
                           }
                           ShowToast("Search for appropriate drivers",
                               ToastState.Success);

@@ -52,7 +52,6 @@ Effects on user includes : shared travel costs ,time savings from high occupancy
  <br /> <br />
 
 ## 🛠 Requirements
- * FireBase .
  * Rest API.
  * Android studio To Run the APP
 ## 🛠 How To Run 
